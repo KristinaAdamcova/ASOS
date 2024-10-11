@@ -52,4 +52,7 @@
     - Notifications: Option to notify users when new events are added in their area or when an event they’ve saved is near.
     - (scrappovali by sme pár stránok ako Go Out alebo visitbratislava, len živo si pamätám tie nervy pri weboch, keď sme robili curl)
   
-     
+MAJO
+- Susedská platforma pre výmenu služieb a zdieľanie vecí
+- Kreatívny portál pre hobby a DIY projekty
+- Rodinný plánovač a organizátor aktivít
