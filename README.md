@@ -56,3 +56,9 @@ MAJO
 - Susedská platforma pre výmenu služieb a zdieľanie vecí
 - Kreatívny portál pre hobby a DIY projekty
 - Rodinný plánovač a organizátor aktivít
+
+### Juraj
+
+- PWA appka na manažment lyžiarskej školy / resp hocičoho čo funguje na podobnom princípe (moja predstava [https://github.com/elk-zone/elk])
+- Travel Planning and Itinerary Builder 🤷‍♂️
+- inakšie sa mi páči tá susedská platforma
