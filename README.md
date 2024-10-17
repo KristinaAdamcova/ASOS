@@ -62,3 +62,9 @@ MAJO
 - PWA appka na manažment lyžiarskej školy / resp hocičoho čo funguje na podobnom princípe (moja predstava [https://github.com/elk-zone/elk])
 - Travel Planning and Itinerary Builder 🤷‍♂️
 - inakšie sa mi páči tá susedská platforma
+
+EMA
+- Aplikácia na porovnanie miestnych cien pohonných hmôt (Jednoduchá aplikácia, ktorá umožňuje používateľom nájsť najnižšie ceny benzínu alebo nafty v ich okolí)
+- Modulárny plánovač jedál pre špeciálne diéty (Platforma na plánovanie jedál, ktorá umožňuje používateľom vytvoriť týždenné jedálničky na základe diétnych obmedzení (bezlepková, vegánska, keto diéta atď.)0
+- tiež sa mi najviac páčia Majove nápady
+
