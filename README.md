@@ -54,6 +54,7 @@
   
 MAJO
 - Susedská platforma pre výmenu služieb a zdieľanie vecí
+Tento portál by spájal ľudí v lokalitách, aby mohli zdieľať veci, ktoré už nepotrebujú, alebo si vymieňať drobné služby. Napríklad, sused môže ponúknuť požičanie záhradného náradia alebo opravu bicykla, zatiaľ čo iný sused ponúka napríklad doučovanie. Používatelia by si mohli vzájomne pomáhať, šetriť peniaze a posilniť komunitu.
 - Kreatívny portál pre hobby a DIY projekty
 - Rodinný plánovač a organizátor aktivít
 
