@@ -69,3 +69,12 @@ EMA
 - Modulárny plánovač jedál pre špeciálne diéty (Platforma na plánovanie jedál, ktorá umožňuje používateľom vytvoriť týždenné jedálničky na základe diétnych obmedzení (bezlepková, vegánska, keto diéta atď.)0
 - tiež sa mi najviac páčia Majove nápady
 
+ANDREJ
+- Susedská platforma sa mi páči, ale aj cestovný itinerár
+- Learning Management System (LMS)
+    - platform for teachers and students, allowing teachers to upload courses, assignments, and quizzes, while students can track progress and interact.
+- Recipe Sharing Platform
+    - A social platform where users can share and browse recipes, add comments, and rate them.
+- Expense Tracker with Budget Insights
+    - An expense tracker that allows users to log expenses, categorize them, and view insights into their spending     
+
