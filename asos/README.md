@@ -1,3 +1,5 @@
+# ASOS APP
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
@@ -35,6 +37,57 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
 
+## NPM
+
+pre instalaciu dependencies
+
+```bash
+npm install
+```
+
+ak nejde npm install tak skusit
+
+```bash
+npm install --legacy-peer-deps
+```
+
+alebo
+
+```bash
+npm install --force
+```
+
+## Prisma
+
+pre vytvoreni modelu
+
+```bash
+npx prisma generate
+```
+
+pre vytvoreni migracii
+
+```bash
+npx prisma migrate dev
+```
+
+pre push zmien do databazy
+
+```bash
+npx prisma db push
+```
+
+pre vytvoreni seedu
+
+```bash
+npx prisma db seed
+```
+
+pre graficke zobrazenie databazy
+
+```bash
+npx prisma studio
+```
 
 ## Docker
 
@@ -42,7 +95,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 docker compose up
 ```
 
-Ak nemate docker, tak si ho nainstalujte. https://www.docker.com/products/docker-desktop/
+Ak nemate docker, tak si ho nainstalujte. [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 
 treba si vytvorit .env file podla .env.example a dorobit do neho hodnoty pre POSTGRES_USER, POSTGRES_PASSWORD a POSTGRES_DB
 
@@ -58,4 +111,4 @@ a potom
 docker compose up --build
 ```
 
-ak sa nieco doinstaluje tak to iste.
+ak sa nieco doinstaluje tak to iste
