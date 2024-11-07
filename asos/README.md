@@ -112,3 +112,9 @@ docker compose up --build
 ```
 
 ak sa nieco doinstaluje tak to iste
+
+## Docs k pouzitym packages
+
+- [prisma](https://www.prisma.io/docs/orm)
+- [chakra](https://www.chakra-ui.com/docs/components/concepts/overview)
+- [chakra templates](https://chakra-templates.vercel.app)
