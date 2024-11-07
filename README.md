@@ -83,3 +83,39 @@ Tento portál by spájal ľudí v lokalitách, aby mohli zdieľať veci, ktoré 
   - A social platform where users can share and browse recipes, add comments, and rate them.
 - Expense Tracker with Budget Insights
   - An expense tracker that allows users to log expenses, categorize them, and view insights into their spending
+
+## UPB -- ASOS
+
+### Inštalácia
+
+- Pre stiahnutie a rozbehanie projektu je potrebne si nainstlovat [Docker Desktop](https://docs.docker.com/desktop/install/windows-install/).
+  Taktiež je potrebné stiahnúť WSL2 (Docker by sa to mal opýtať pri insťalácii).
+- Pre lepšie používanie príkazového riadku odporúčam stiahnúť aj [Windows PowerShell (WPS)](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3#installing-the-msi-package) ale
+  malo by to fungovať aj vo **WSL** príkazovom riadku.
+- Stiahnúť si repozitár z GitHubu.
+
+Vo WPS (asi aj vo WSL) sa dá zistiť či máte nainštalovaný Docker pomocou príkazu `docker --version`
+
+### Zbuildenie projektu pomocou WPS
+
+Pravdepodobne to bude fungovať aj cez WSL ale nemám s tým skúsenosť.
+
+1. Spustiť WPS
+2. Nastaviť sa do priečinka projektu pomocou príkazu cd
+3. Spustiť príkaz `docker-compose up -d`
+4. Po zbuildovaní projektu v Dockeri (všetky kontajnery by mali mat stav **RUNNING** alebo **STARTED**)
+
+### Spustenie projektu -- jedine tu bude treba spravit zmeny
+
+Kontajner obsahuje image pre **PHP**, **MYSQL** a **PHPMYADMIN**.
+
+- Phpmyadmin sa spúšta cez [http://localhost:8080](http://localhost:8080), credentials sú v súbore **config.php**. Taktiež by už mala byť
+  vytvorená databáza 'upb' a tabuľka 'pouzivatel' s jedným záznamom. Avšak keďže je to lokálne tak zatiaľ som neprišiel na to ako mať spoločnú databázu (možno cez GitHub a potom si ju importovať).
+- **index.php** sa spúšta pomocou [http://localhost](http://localhost).
+
+### Update projektu
+
+Ak spravíte zmeny v aplikácii, je potrebné vykonať vo WPS (WSL) 2 príkazy:
+
+1. `docker-compose build`
+2. `docker-compose up -d`
