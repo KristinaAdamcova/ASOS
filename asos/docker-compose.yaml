@@ -1,4 +1,3 @@
-
 services:
   app:
     build:
@@ -10,6 +9,13 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+      - NODE_ENV=development
+    networks:
+      - asos-network
 
   db:
     image: postgres:15
@@ -17,6 +23,22 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - asos-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+networks:
+  asos-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
