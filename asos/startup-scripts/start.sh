@@ -1,4 +1,4 @@
-#!/bin/sh
+
 
 # Wait for database to be ready
 echo "Waiting for database to be ready..."
