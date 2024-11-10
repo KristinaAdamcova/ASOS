@@ -42,9 +42,25 @@ export default async function Home() {
         return (
             <div>
                 <h1>Our Products</h1>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px' }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        flexWrap: 'wrap', // Ensures items wrap to the next line
+                        gap: '20px', // Margin between items
+                        margin: '0 200px',
+                    }}
+                >
                     {products.map((product) => (
-                        <div key={product.id} style={{ border: '1px solid #ddd', padding: '10px', borderRadius: '8px' }}>
+                        <div
+                            key={product.id}
+                            style={{
+                                flex: '1 1 calc(25% - 20px)', // 4 items per row (25% width minus the gap)
+                                boxSizing: 'border-box', // Ensures padding is included in width calculation
+                                border: '1px solid #ddd',
+                                padding: '10px',
+                                borderRadius: '8px',
+                            }}
+                        >
                             <h2>{product.name}</h2>
                             <p>{product.description}</p>
                             <p><strong>Category:</strong> {product.category}</p>
@@ -65,8 +81,6 @@ export default async function Home() {
                 </div>
             </div>
         );
-
-
     } catch (error) {
         // Handle errors (network issues, invalid JSON, etc.)
         console.error('Error fetching products:', error);
