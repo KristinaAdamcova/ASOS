@@ -28,8 +28,9 @@ async function main() {
     const product1 = await prisma.product.create({
         data: {
             name: 'Laptop',
+            photoPath: 'notebook.png',
             description: 'High-performance laptop',
-            category: 'Electronics',
+            category: 'predaj',
             available: 10,
             price: 1200.00,
             city: 'New York',
@@ -42,8 +43,9 @@ async function main() {
     const product2 = await prisma.product.create({
         data: {
             name: 'Smartphone',
+            photoPath: 'smartphone.png',
             description: 'Latest model smartphone',
-            category: 'Electronics',
+            category: 'sluzby',
             available: 20,
             price: 800.00,
             city: 'San Francisco',
