@@ -1,4 +1,4 @@
-
+# #!/bin/sh
 
 # Wait for database to be ready
 echo "Waiting for database to be ready..."
@@ -15,6 +15,9 @@ npx prisma migrate dev --name init --create-only
 # Deploy migrations
 echo "Deploying migrations..."
 npx prisma migrate deploy
+
+echo "Deploying seed data"
+npx prisma db seed
 
 # Start the application
 echo "Starting the application..."
