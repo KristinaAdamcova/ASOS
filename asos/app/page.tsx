@@ -1,6 +1,13 @@
 // app/page.tsx
 import React from 'react';
 
+// Define Product and User types
+type User = {
+    id: number;
+    email: string;
+    name: string;
+};
+
 type Product = {
     id: number;
     name: string;
@@ -9,9 +16,8 @@ type Product = {
     available: boolean;
     price: number;
     city: string;
-    userId: number;
+    user: User | null; // Changed from userId to user (to hold the full user object)
 };
-
 
 export default async function Home() {
     try {
@@ -25,7 +31,7 @@ export default async function Home() {
             throw new Error(`Failed to fetch products: ${res.statusText}`);
         }
 
-        // Try to parse the JSON response
+        // Parse the JSON response
         const products: Product[] = await res.json();
 
         // Ensure products is an array before mapping
@@ -45,12 +51,22 @@ export default async function Home() {
                             <p><strong>Price:</strong> ${product.price}</p>
                             <p><strong>Available:</strong> {product.available ? 'Yes' : 'No'}</p>
                             <p><strong>City:</strong> {product.city}</p>
-                            <p><strong>User ID:</strong> {product.userId}</p>
+
+                            {/* Render user information */}
+                            {product.user && (
+                                <div>
+                                    <h3>Seller Information</h3>
+                                    <p><strong>Name:</strong> {product.user.name}</p>
+                                    <p><strong>Email:</strong> {product.user.email}</p>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>
             </div>
         );
+
+
     } catch (error) {
         // Handle errors (network issues, invalid JSON, etc.)
         console.error('Error fetching products:', error);
