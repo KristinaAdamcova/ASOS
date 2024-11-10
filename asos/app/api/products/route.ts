@@ -1,7 +1,7 @@
 // app/api/products/route.ts
 
 import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 // Helper function to fetch user by ID
 const fetchUserById = async (userId: number) => {
@@ -18,12 +18,20 @@ const fetchUserById = async (userId: number) => {
     }
 };
 
-export const GET = async () => {
+export const GET = async (req: NextRequest) => {
     try {
-        // Fetch products from the database
+        const { searchParams } = new URL(req.url);
+        let category = searchParams.get("category"); // Get category from query params
+
+        if (category == 'vsetko'){
+            category = null
+        }
+        // Fetch products from the database, with optional category filter
         const products = await prisma.product.findMany({
+            where: category ? { category } : {}, // Apply category filter if provided
             select: {
                 id: true,
+                photoPath: true,
                 name: true,
                 description: true,
                 category: true,
@@ -38,9 +46,9 @@ export const GET = async () => {
         const productsWithUser = await Promise.all(
             products.map(async (product) => {
                 const user = await fetchUserById(product.userId); // Fetch user for each product
-                // Replace the userId with the full user object
+                // Replace the userId with the full user object, excluding sensitive data
                 const { userId, ...productWithoutUserId } = product;
-                return { ...productWithoutUserId, user }; // Attach user data to product
+                return { ...productWithoutUserId, user: user ? { id: user.id, name: user.name, email: user.email } : null };
             })
         );
 

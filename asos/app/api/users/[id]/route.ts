@@ -1,34 +1,30 @@
 // app/api/users/[id]/route.ts
 
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
 
-export const GET = async (req: Request, { params }: { params: { id: string } }) => {
+export const GET = async (req: NextRequest, { params }: { params: { id: string } }) => {
     try {
-        const { id } = params;  // Extract the `id` from the URL params
+        // Ensure ID is provided as a number
+        const params1 = await params
+        const userId = parseInt(params1.id, 10);
+        if (isNaN(userId)) {
+            return NextResponse.json({ message: "Invalid user ID" }, { status: 400 });
+        }
 
-        // Fetch the user from the database using Prisma
+        // Fetch the user without the password
         const user = await prisma.user.findUnique({
-            where: {
-                id: Number(id), // Ensure the ID is passed as a number
-            },
-            select: {
-                id: true,
-                email: true,
-                name: true,
-                // Do not include 'password'
-            },
+            where: { id: userId },
+            select: { id: true, email: true, name: true }, // Exclude sensitive fields like password
         });
 
         if (!user) {
-            // Return a 404 if the user was not found
             return NextResponse.json({ message: "User not found" }, { status: 404 });
         }
 
-        // Return the user data as JSON
         return NextResponse.json(user);
     } catch (error) {
-        console.error("Error fetching user by ID:", error);
+        console.error("Error fetching user:", error);
         return NextResponse.json({ message: "Internal server error" }, { status: 500 });
     }
 };
