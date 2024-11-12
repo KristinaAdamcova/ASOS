@@ -6,6 +6,7 @@ import { z } from "zod";
 // Define the schema for validation with stronger password requirements
 const registerSchema = z.object({
     email: z.string().email("Invalid email address"),
+    name: z.string().min(1, "Name is required"),
     password: z
         .string()
         .min(8, "Password must be at least 8 characters long")
@@ -17,10 +18,10 @@ const registerSchema = z.object({
 
 export async function POST(request: Request) {
     try {
-        const { email, password } = await request.json();
+        const { email, name, password } = await request.json();
 
         // Validate input using zod schema
-        const validation = registerSchema.safeParse({ email, password });
+        const validation = registerSchema.safeParse({ email, name, password });
         if (!validation.success) {
             return NextResponse.json(
                 { message: validation.error.errors[0].message },
@@ -44,6 +45,7 @@ export async function POST(request: Request) {
         const newUser = await prisma.user.create({
             data: {
                 email,
+                name,
                 password: hashedPassword,
             },
         });
