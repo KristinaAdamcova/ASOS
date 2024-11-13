@@ -53,6 +53,7 @@ export default async function Home({ searchParams }: { searchParams: { category?
                     <Link href="/?category=sluzby" style={{ marginRight: '10px' }}>Služby</Link>
                     <Link href="/?category=predaj" style={{ marginRight: '10px' }}>Predaj</Link>
                     <Link href="/?category=udalosti" style={{ marginRight: '10px' }}>Udalosti</Link>
+                    <Link href="/profile" style={{ marginRight: '10px' }}>Profile</Link>
                 </div>
 
                 {/* Product Grid */}
