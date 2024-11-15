@@ -30,7 +30,7 @@ async function main() {
             name: 'Laptop',
             photoPath: 'notebook.png',
             description: 'High-performance laptop',
-            category: 'predaj',
+            category: 'sale',
             available: 10,
             price: 1200.00,
             city: 'New York',
@@ -45,10 +45,25 @@ async function main() {
             name: 'Smartphone',
             photoPath: 'smartphone.png',
             description: 'Latest model smartphone',
-            category: 'sluzby',
+            category: 'service',
             available: 20,
             price: 800.00,
             city: 'San Francisco',
+            user: {
+                connect: { id: user2.id },
+            },
+        },
+    });
+
+    const product3 = await prisma.product.create({
+        data: {
+            name: 'Neighbourhood picnic',
+            photoPath: 'picnic.png',
+            description: 'Picnic for everyone in Central park',
+            category: 'event',
+            available: 20,
+            price: 0.00,
+            city: 'New York',
             user: {
                 connect: { id: user2.id },
             },
