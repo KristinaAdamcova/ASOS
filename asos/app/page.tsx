@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import NavBar from "@/components/homepage/NavBar";
 import SearchBar from "@/components/homepage/SearchBar";
+import Product from "@/components/homepage/Product";
 import { useSearchParams } from 'next/navigation';
 
 type User = {
@@ -76,62 +77,25 @@ export default function Home() {
             <div className="flex justify-center items-center min-h-7 mt-3 mb-3">
                 <div className="space-x-4">
                     <button className="text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800">
-                        <Link href="/">Všetko</Link>
+                        <Link href="/">All</Link>
                     </button>
                     <button className="text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800">
-                        <Link href="/?category=sluzby">Služby</Link>
+                        <Link href="/?category=service">Services</Link>
                     </button>
                     <button className="text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800">
-                        <Link href="/?category=predaj">Predaj</Link>
+                        <Link href="/?category=sale">Sales</Link>
                     </button>
                     <button className="text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800">
-                        <Link href="/?category=udalosti">Udalosti</Link>
+                        <Link href="/?category=event">Events</Link>
                     </button>
                 </div>
             </div>
+            <hr className="m-3"/>
 
             {/* Product Grid */}
-            <div
-                style={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '20px',
-                    margin: '0 200px',
-                }}
-            >
+            <div className="flex flex-wrap gap-5 mx-auto px-5 justify-center" >
                 {filteredProducts.map((product) => (
-                    <div
-                        key={product.id}
-                        style={{
-                            flex: '1 1 calc(25% - 20px)',
-                            boxSizing: 'border-box',
-                            border: '1px solid #ddd',
-                            padding: '10px',
-                            borderRadius: '8px',
-                            margin: '0 10px',
-                        }}
-                    >
-                        <h2>{product.name}</h2>
-                        <Image
-                            src={`/${product.photoPath}`}
-                            alt="Description of the image"
-                            width={100}
-                            height={100}
-                        />
-                        <p>{product.description}</p>
-                        <p><strong>Category:</strong> {product.category}</p>
-                        <p><strong>Price:</strong> ${product.price}</p>
-                        <p><strong>Available:</strong> {product.available ? 'Yes' : 'No'}</p>
-                        <p><strong>City:</strong> {product.city}</p>
-
-                        {product.user && (
-                            <div>
-                                <h3>Seller Information</h3>
-                                <p><strong>Name:</strong> {product.user.name}</p>
-                                <p><strong>Email:</strong> {product.user.email}</p>
-                            </div>
-                        )}
-                    </div>
+                    <Product key={product.id} {...product} />
                 ))}
             </div>
         </div>

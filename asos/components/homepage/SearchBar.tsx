@@ -12,7 +12,7 @@ export default function SearchBar({ onSearch }: { onSearch: (query: string) => v
 
     return (
         <form
-            className="max-w-md mx-auto bg-white border border-black rounded-lg shadow dark:bg-gray-900"
+            className="max-w-md mx-auto bg-white rounded-lg shadow dark:bg-gray-900"
             onSubmit={handleSubmit}
         >
             <label

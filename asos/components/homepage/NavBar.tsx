@@ -7,7 +7,7 @@ export default function NavBar() {
     return (
 
 
-        <nav className="bg-white border border-black rounded-lg shadow dark:bg-gray-900 mb-5">
+        <nav className="bg-white rounded-lg shadow dark:bg-gray-900 mb-5">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <Image
@@ -37,6 +37,10 @@ export default function NavBar() {
                                aria-current="page">Home</a>
                         </li>
                         <li>
+                            <a href="/sell"
+                               className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-lime-700 md:p-0 dark:text-white md:dark:hover:text-lime-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Sell product</a>
+                        </li>
+                        <li>
                             <a href="/login"
                                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-lime-700 md:p-0 dark:text-white md:dark:hover:text-lime-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Login</a>
                         </li>
@@ -50,7 +54,8 @@ export default function NavBar() {
                         </li>
                         <li>
                             <a href="#"
-                               className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-lime-700 md:p-0 dark:text-white md:dark:hover:text-lime-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Log out</a>
+                               className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-lime-700 md:p-0 dark:text-white md:dark:hover:text-lime-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Log
+                                out</a>
                         </li>
                     </ul>
                 </div>
