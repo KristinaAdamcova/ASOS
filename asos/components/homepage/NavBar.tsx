@@ -1,9 +1,43 @@
 "use client"
 
 import Image from "next/image";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {jwtDecode} from 'jwt-decode';
+
+interface JwtPayload {
+    name?: string;
+    // exp?: number; // Optional if expiration is included
+}
 
 export default function NavBar() {
+    const [username, setUsername] = useState<string | null>(null);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        console.log(token)
+
+        if (token) {
+            try {
+                const decoded = jwtDecode<JwtPayload>(token);
+
+                // const currentTime = Date.now() / 1000;
+                // if (decoded.exp && decoded.exp < currentTime) {
+                //     console.warn("Token has expired");
+                //     setUsername(null);
+                //     return;
+                // }
+
+                setUsername(decoded.name || null);
+                console.log(decoded)
+            } catch (error) {
+                console.error("Invalid token:", error);
+                setUsername(null);
+            }
+        } else {
+            setUsername(null);
+        }
+    }, []);
+
     return (
 
 
@@ -50,7 +84,9 @@ export default function NavBar() {
                         </li>
                         <li>
                             <a href="/profile"
-                               className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-lime-700 md:p-0 dark:text-white md:dark:hover:text-lime-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Username</a>
+                               className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-lime-700 md:p-0 dark:text-white md:dark:hover:text-lime-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                                {username ? `Welcome, ${username}` : "Welcome, Guest"}
+                            </a>
                         </li>
                         <li>
                             <a href="#"
