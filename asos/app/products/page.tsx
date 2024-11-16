@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import NavBar from "@/components/homepage/NavBar";
+import ProductDetail from "@/components/products/ProductDetail";
 
 const fetchProduct = async (id: string | null) => {
     if (!id) throw new Error("Product ID is required");
@@ -48,10 +50,9 @@ const ProductPage = () => {
 
     return (
         <div>
-            <h1>{product.name}</h1>
-            <p>{product.description}</p>
-            <p>Price: ${product.price}</p>
-            {/* Render other product details */}
+            <NavBar/>
+
+            <ProductDetail {...product} />
         </div>
     );
 };
