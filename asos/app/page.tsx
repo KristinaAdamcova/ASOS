@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import NavBar from "@/components/homepage/NavBar";
@@ -42,30 +42,41 @@ async function fetchProducts(category: string | null = null): Promise<Product[]>
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState('');
     const [products, setProducts] = useState<Product[]>([]);
+    const [category, setCategory] = useState<string | null>(null);
     const searchParams = useSearchParams();
+
+    // Extract category from searchParams in useEffect to avoid triggering updates in render
+    useEffect(() => {
+        setCategory(searchParams.get('category') || null);
+    }, [searchParams]);
 
     useEffect(() => {
         async function loadProducts() {
-            const category = searchParams.get('category') || null;
-            const fetchedProducts = await fetchProducts(category);
-            setProducts(fetchedProducts);
+            try {
+                const fetchedProducts = await fetchProducts(category);
+                setProducts(fetchedProducts);
+            } catch (error) {
+                console.error("Error fetching products:", error);
+            }
         }
 
         loadProducts();
-    }, [searchParams]);
+    }, [category]);
 
-    const filteredProducts = products.filter((product) => {
+    // Filter products based on the search query
+    const filteredProducts = useMemo(() => {
         const lowerCaseQuery = searchQuery.toLowerCase();
 
-        // Check all fields against the search query
-        return (
-            product.name.toLowerCase().includes(lowerCaseQuery) ||
-            product.description.toLowerCase().includes(lowerCaseQuery) ||
-            product.category.toLowerCase().includes(lowerCaseQuery) ||
-            product.city.toLowerCase().includes(lowerCaseQuery) ||
-            (product.user?.name.toLowerCase().includes(lowerCaseQuery) ?? false)
-        );
-    });
+        return products.filter((product) => {
+            return (
+                product.name.toLowerCase().includes(lowerCaseQuery) ||
+                product.description.toLowerCase().includes(lowerCaseQuery) ||
+                product.category.toLowerCase().includes(lowerCaseQuery) ||
+                product.city.toLowerCase().includes(lowerCaseQuery) ||
+                (product.user?.name.toLowerCase().includes(lowerCaseQuery) ?? false)
+            );
+        });
+    }, [searchQuery, products]);
 
     return (
         <div>
@@ -95,7 +106,9 @@ export default function Home() {
             {/* Product Grid */}
             <div className="flex flex-wrap gap-5 mx-auto px-5 justify-center" >
                 {filteredProducts.map((product) => (
-                    <Product key={product.id} {...product} />
+                    <Link key={product.id} href={`/products?id=${product.id}`}>
+                        <Product {...product} />
+                    </Link>
                 ))}
             </div>
         </div>
