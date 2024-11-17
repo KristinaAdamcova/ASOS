@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
+  id    String     @id @default(cuid())
   email String  @unique
   name  String?
   password String
@@ -22,10 +22,54 @@ model User {
   histories History[]
   ratingsGiven     Rating[] @relation("RatingsGiven")
   ratingsReceived  Rating[] @relation("RatingsReceived")
+  
+  // for next-auth
+  emailVerified DateTime?
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+ 
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  @@id([provider, providerAccountId])
+}
+ 
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+ 
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+ 
+  @@id([identifier, token])
 }
 
 model Product {
-  id    Int     @id @default(autoincrement())
+  id    String     @id @default(cuid())
   photoPath String
   name  String
   description  String
@@ -33,24 +77,24 @@ model Product {
   available Int
   price Float
   city  String
-  userId  Int
+  userId  String
   user    User   @relation(fields: [userId], references: [id])
   histories History[]
 }
 
 model History {
-  id    Int     @id @default(autoincrement())
-  userId  Int
+  id    String     @id @default(cuid())
+  userId  String
   user    User   @relation(fields: [userId], references: [id])
-  productId  Int
+  productId  String
   product    Product   @relation(fields: [productId], references: [id])
   timestamp DateTime @default(now())
 }
 
 model Rating {
-  id    Int     @id @default(autoincrement())
-  ratedById  Int
-  ratedToId  Int
+  id    String     @id @default(cuid())
+  ratedById  String
+  ratedToId  String
   description String
   rating Int
   ratedBy      User  @relation("RatingsGiven", fields: [ratedById], references: [id])

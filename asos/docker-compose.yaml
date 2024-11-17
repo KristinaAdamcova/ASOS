@@ -30,7 +30,7 @@ services:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${POSTGRES_PORT}/${POSTGRES_DB}
     networks:
       - asos-network
-    command: ["sh", "-c", "npx prisma migrate deploy && npx prisma db seed && npm run dev"]
+    command: ["sh", "-c", "npx prisma migrate dev --name init --create-only && npx prisma migrate deploy && npx prisma db seed && npm run dev"]
 
 networks:
   asos-network:
