@@ -1,44 +1,37 @@
 services:
+  db:
+    image: postgres:latest
+    ports:
+      - '${POSTGRES_PORT}:5432'
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
+    healthcheck:
+      test: ["CMD-SHELL", "sh -c 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}'"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    networks:
+      - asos-network
+
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: asos-app
+    build: .
     ports:
       - '3000:3000'
     volumes:
       - .:/app
       - /app/node_modules
+      - /app/.next
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
-      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
-      - NODE_ENV=development
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:${POSTGRES_PORT}/${POSTGRES_DB}
     networks:
       - asos-network
-
-  db:
-    image: postgres:15
-    container_name: asos-db
-    ports:
-      - '5432:5432'
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=postgres
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - asos-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
+    command: ["sh", "-c", "npx prisma migrate deploy && npx prisma db seed && npm run dev"]
 
 networks:
   asos-network:
     driver: bridge
-
-volumes:
-  postgres_data:
