@@ -1,24 +1,27 @@
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { prisma } from './lib/prisma';
-import { NextAuthConfig } from 'next-auth';
+import type { NextAuthConfig } from "next-auth";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import prisma from "./lib/prisma"; // You'll need to create this
 
 export const authConfig = {
+  providers: [],
+  adapter: PrismaAdapter(prisma),
   pages: {
-    signIn: '/auth/login',
+    signIn: "/login",
   },
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnDashboard = nextUrl.pathname.startsWith('/dashboard');
-      if (isOnDashboard) {
-        if (isLoggedIn) return true;
+      const protectedPaths = ["/profile", "/sell"];
+      const isProtected = protectedPaths.some((path) =>
+        nextUrl.pathname.startsWith(path)
+      );
+
+      if (isProtected && !isLoggedIn) {
         return false;
-      } else if (isLoggedIn) {
-        return Response.redirect(new URL('/dashboard', nextUrl));
       }
+
       return true;
     },
   },
-  adapter: PrismaAdapter(prisma),
-  providers: [],
+  session: { strategy: "jwt" },
 } satisfies NextAuthConfig;

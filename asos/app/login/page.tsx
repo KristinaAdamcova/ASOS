@@ -4,7 +4,6 @@ import Image from "next/image";
 export default function LoginPage() {
     return (
         <div className="min-h-screen bg-gradient-to-r from-green-300 via-green-400 to-green-500 flex flex-col justify-center items-center">
-            {/* Add logo */}
             <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                 <Image
                     src="/logo.png" // Dynamically include the product's photo path

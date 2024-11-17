@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma';
+import prisma from '@/lib/prisma';
 import type { Product } from '@prisma/client';
 import Image from 'next/image';
 import React from "react";

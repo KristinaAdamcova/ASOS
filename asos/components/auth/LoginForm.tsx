@@ -1,49 +1,55 @@
-"use client"
+'use client';
 
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
     const router = useRouter();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [error, setError] = useState<string | null>(null);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        setError(null);
+
+        const formData = new FormData(e.currentTarget);
+        
         try {
-            const res = await fetch("/api/auth/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password }),
+            const response = await signIn('credentials', {
+                email: formData.get('email') as string,
+                password: formData.get('password') as string,
+                redirect: false,
             });
 
-            if (res.ok) {
-                const { token } = await res.json();
-                localStorage.setItem("token", token);
-                router.push("/"); // Redirect to the homepage or dashboard
-            } else {
-                const { message } = await res.json();
-                setErrorMessage(message);
+            if (response?.error) {
+                setError('Invalid credentials');
+                return;
             }
+
+            router.push('/'); // Redirect on success
+            router.refresh(); // Refresh the page to update the session
         } catch (error) {
-            console.error("Error:", error);
-            setErrorMessage("An error occurred");
+            console.error('Login error:', error);
+            setError('Something went wrong');
         }
     };
 
     return (
-        <form className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg" onSubmit={handleSubmit}>
-            {errorMessage && (
-                <div className="mb-4 text-red-500 text-sm">{errorMessage}</div>
+        <form 
+            onSubmit={handleSubmit}
+            className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg"
+        >
+            {error && (
+                <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                    {error}
+                </div>
             )}
             <div className="mb-4">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                 <input
+                    name="email"
                     id="email"
                     type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     required
@@ -52,10 +58,9 @@ export default function LoginForm() {
             <div className="mb-4">
                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
                 <input
+                    name="password"
                     id="password"
                     type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your password"
                     className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     required
