@@ -1,10 +1,11 @@
 import RegistrationForm from "@/components/auth/RegistrationForm";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function RegistrationPage() {
     return (
         <div className="min-h-screen bg-gradient-to-r from-green-300 via-green-400 to-green-500 flex flex-col justify-center items-center">
-            <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+            <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                 <Image
                     src="/logo.png" // Dynamically include the product's photo path
                     alt="Description of the image"
@@ -13,7 +14,7 @@ export default function RegistrationPage() {
                 />
                 <span
                     className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Neighbourhood portal</span>
-            </a>
+            </Link>
 
 
             <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg w-full mt-20">
