@@ -11,6 +11,6 @@
 - vytvorit novy page kde vyplni dotaznik na pridanie noveho produktu
   - tato cesta bude spristupnena iba loginnutemu userovi
   - formular so selectom ze predaj sluzba udalost
-  - nahratie fotografie
-~~- vytvorit page na prehlad produktu, proste len ked sa klikne na produkt~~
+    - *+* nahratie fotografie
+  - ~~vytvorit page na prehlad produktu, proste len ked sa klikne na produkt~~
 - kosik?
