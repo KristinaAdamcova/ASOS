@@ -2,8 +2,6 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import NavBar from "@/components/homepage/NavBar";
 import SearchBar from "@/components/homepage/SearchBar";
 import Product from "@/components/homepage/Product";
 import { useSearchParams } from 'next/navigation';
@@ -80,8 +78,6 @@ export default function Home() {
 
     return (
         <div>
-            <NavBar />
-
             <SearchBar onSearch={setSearchQuery} />
 
             {/* Filter Buttons */}
@@ -106,7 +102,7 @@ export default function Home() {
             {/* Product Grid */}
             <div className="flex flex-wrap gap-5 mx-auto px-5 justify-center" >
                 {filteredProducts.map((product) => (
-                    <Link key={product.id} href={`/products?id=${product.id}`}>
+                    <Link key={product.id} href={`/products/${product.id}`}>
                         <Product {...product} />
                     </Link>
                 ))}

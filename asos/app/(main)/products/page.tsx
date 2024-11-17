@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import NavBar from "@/components/homepage/NavBar";
 import ProductDetail from "@/components/products/ProductDetail";
 
 const fetchProduct = async (id: string | null) => {
@@ -50,9 +49,7 @@ const ProductPage = () => {
 
     return (
         <div>
-            <NavBar/>
-
-            <ProductDetail {...product} />
+            <ProductDetail product={product} />
         </div>
     );
 };

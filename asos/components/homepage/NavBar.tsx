@@ -43,7 +43,7 @@ export default function NavBar() {
 
         <nav className="bg-white rounded-lg shadow dark:bg-gray-900 mb-5">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
-                <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+                <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <Image
                         src="/logo.png" // Dynamically include the product's photo path
                         alt="Description of the image"

@@ -1,6 +1,6 @@
+import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
-import prisma from "@/lib/prisma";
+import bcrypt from "bcrypt";
 import { z } from "zod";
 
 // Define the schema for validation with stronger password requirements
