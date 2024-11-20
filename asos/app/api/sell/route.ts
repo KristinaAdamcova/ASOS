@@ -1,16 +1,11 @@
 import prisma from "@/lib/prisma";
-import {NextRequest, NextResponse} from "next/server";
-import {Product} from "@prisma/client";
-import {useSession} from "next-auth/react";
-import {fetchUser} from "@/app/lib/data";
+import { NextRequest, NextResponse } from "next/server";
+import { Product } from "@prisma/client";
 
 type CreateProductReqBody = Omit<Product, "id">;
 
-
 export const POST = async (req: NextRequest) => {
     try {
-
-
         const body: CreateProductReqBody = await req.json();
 
         console.log("product_body" + body);
@@ -19,20 +14,22 @@ export const POST = async (req: NextRequest) => {
             return NextResponse.json("Invalid request body", { status: 400 });
         }
 
-
         // Create the new user
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const newProduct = await prisma.product.create({
             data: {
-                photoPath: photoPath,
-                name: name,
-                description: description,
-                category: category,
-                available: available,
-                price: price,
-                city: city,
-                user:user_body.id
-
+                photoPath: body.photoPath,
+                name: body.name,
+                description: body.description,
+                category: body.category,
+                available: body.available,
+                price: body.price,
+                city: body.city,
+                user: {
+                    connect: {
+                        id: body.userId,
+                    },
+                },
             },
         });
 
@@ -44,7 +41,11 @@ export const POST = async (req: NextRequest) => {
             });
         }
         console.error(error);
-        return NextResponse.json("Something went wrong publishing the product", {
-            status: 500,
-        });
-}
+        return NextResponse.json(
+            "Something went wrong publishing the product",
+            {
+                status: 500,
+            }
+        );
+    }
+};
