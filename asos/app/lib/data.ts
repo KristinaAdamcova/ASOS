@@ -19,3 +19,10 @@ export async function fetchProduct(id: string): Promise<Product | null> {
     });
     return product;
 }
+
+export async function fetchProductsByUser(userId: string): Promise<Product[]> {
+    const products = await prisma.product.findMany({
+        where: { userId: userId },
+    });
+    return products;
+}

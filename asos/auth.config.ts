@@ -9,6 +9,12 @@ export const authConfig = {
     signIn: "/login",
   },
   callbacks: {
+    async session({ session, token }) {
+      if (session.user) {
+        session.user.id = token.sub as string;
+      }
+      return session;
+    },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const protectedPaths = ["/profile", "/profile/*", "/sell"];

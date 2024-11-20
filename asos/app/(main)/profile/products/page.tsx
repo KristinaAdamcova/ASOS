@@ -1,6 +1,22 @@
+import { fetchProductsByUser } from "@/app/lib/data";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import React from "react";
 
-export default function Products() {
+export default async function Products() {
+    const session = await auth();
+    const user = session?.user;
+
+    console.log(user);
+
+    if (!user) {
+        redirect("/login");
+    }
+
+    const products = await fetchProductsByUser(user.id);
+
+    console.log(products);
+    
     return (
         <div className="flex justify-center items-center">
             <div className="max-w-lg mx-auto p-8 bg-white rounded-lg shadow-lg w-full">
