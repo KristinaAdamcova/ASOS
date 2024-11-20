@@ -42,6 +42,7 @@ export async function POST(request: Request) {
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // Create the new user
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const newUser = await prisma.user.create({
             data: {
                 email,

@@ -7,14 +7,10 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
     try {
         // Ensure ID is provided as a number
         const params1 = await params
-        const userId = parseInt(params1.id, 10);
-        if (isNaN(userId)) {
-            return NextResponse.json({ message: "Invalid user ID" }, { status: 400 });
-        }
 
         // Fetch the user without the password
         const user = await prisma.user.findUnique({
-            where: { id: userId },
+            where: { id: params1.id },
             select: { id: true, email: true, name: true }, // Exclude sensitive fields like password
         });
 

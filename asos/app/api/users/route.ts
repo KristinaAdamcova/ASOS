@@ -18,11 +18,11 @@ export const POST = async (req: NextRequest) => {
             });
         }
 
-        console.log(body);
         const user = await prisma.user.create({
             data: {
                 email: body.email,
                 name: body.name,
+                password: body.password,
             },
         });
         return NextResponse.json({ user });

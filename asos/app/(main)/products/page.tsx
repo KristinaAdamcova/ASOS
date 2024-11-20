@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ProductDetail from "@/components/products/ProductDetail";
+import { Product } from "@prisma/client";
 
 const fetchProduct = async (id: string | null) => {
     if (!id) throw new Error("Product ID is required");
@@ -16,7 +17,7 @@ const fetchProduct = async (id: string | null) => {
 
 const ProductPage = () => {
     const searchParams = useSearchParams();
-    const [product, setProduct] = useState<any | null>(null);
+    const [product, setProduct] = useState<Product | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -29,9 +30,9 @@ const ProductPage = () => {
                 const fetchedProduct = await fetchProduct(id);
                 console.log("Fetched product:", fetchedProduct); // Debug API response
                 setProduct(fetchedProduct);
-            } catch (err: any) {
+            } catch (err: unknown) {
                 console.error("Error fetching product:", err);
-                setError(err.message);
+                setError(err instanceof Error ? err.message : "Unknown error");
                 setProduct(null);
             }
         };

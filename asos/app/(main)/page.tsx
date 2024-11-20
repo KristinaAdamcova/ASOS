@@ -21,7 +21,7 @@ type Product = {
     available: boolean;
     price: number;
     city: string;
-    user: User | null;
+    user: User | undefined;
 };
 
 async function fetchProducts(category: string | null = null): Promise<Product[]> {
