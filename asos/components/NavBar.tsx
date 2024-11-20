@@ -1,10 +1,9 @@
-import { auth } from "@/auth";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
-export default async function NavBar() {
-    const session = await auth();
+export default function NavBar() {
+    const session = useSession();
 
     return (
         <nav className="bg-white rounded-lg shadow dark:bg-gray-900 mb-5">
@@ -45,7 +44,7 @@ export default async function NavBar() {
                                 <li>
                                     <Link href="/profile"
                                         className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-lime-700 md:p-0 dark:text-white md:dark:hover:text-lime-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
-                                        {session.user?.name ? `Welcome, ${session.user?.name}` : "Welcome, Guest"}
+                                        {session.data?.user?.name ? `Welcome, ${session.data?.user?.name}` : "Welcome, Guest"}
                                     </Link>
                                 </li>
                                 <li>
