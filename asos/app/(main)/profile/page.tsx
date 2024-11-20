@@ -6,6 +6,10 @@ import { useSession } from 'next-auth/react';
 export default function Profile() {
     const { data: session, status } = useSession();
     const [isClient, setIsClient] = useState(false);
+    const [formData, setFormData] = useState({
+        name: session?.user?.name || '',
+        email: session?.user?.email || '',
+    });
 
     useEffect(() => {
         setIsClient(true); // Ensures the component renders only on the client
@@ -31,22 +35,64 @@ export default function Profile() {
         );
     }
 
-    // Safely access user properties
-    const name = session?.user?.name || 'Guest';
-    const email = session?.user?.email || 'Not Available';
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault();
+        // Here, you'd send the updated data to your backend or API
+        console.log('Updated profile:', formData);
+        alert('Profile updated successfully!');
+    };
 
     return (
         <div className="bg-gradient-to-r from-green-300 via-green-400 to-green-500 flex justify-center items-center">
             <div className="max-w-lg mx-auto p-8 bg-white rounded-lg shadow-lg w-full">
                 <h1 className="text-4xl font-bold text-center text-gray-800 mb-6">Profile</h1>
-                <div className="text-lg text-gray-700">
-                    <p className="font-semibold text-xl mb-4">
-                        <span className="text-gray-800">Name:</span> {name}
-                    </p>
-                    <p className="font-semibold text-xl">
-                        <span className="text-gray-800">Email:</span> {email}
-                    </p>
-                </div>
+                <p className="text-gray-700 text-center mb-6">
+                    Welcome to your profile page. You can update your information below.
+                </p>
+                <form onSubmit={handleFormSubmit}>
+                    <div className="mb-4">
+                        <label htmlFor="name" className="block text-lg font-semibold text-gray-800">
+                            Name
+                        </label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            className="w-full mt-2 p-3 border rounded-lg"
+                            required
+                        />
+                    </div>
+                    <div className="mb-4">
+                        <label htmlFor="email" className="block text-lg font-semibold text-gray-800">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            className="w-full mt-2 p-3 border rounded-lg"
+                            required
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full bg-green-500 text-white py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors"
+                    >
+                        Update Profile
+                    </button>
+                </form>
             </div>
         </div>
     );
