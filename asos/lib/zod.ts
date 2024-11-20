@@ -1,4 +1,4 @@
-import { object, string } from "zod";
+import { object, string, z } from "zod";
 
 export const loginSchema = object({
     email: string({ required_error: "Email is required" })
@@ -9,21 +9,13 @@ export const loginSchema = object({
 });
 
 export const registerSchema = object({
-    email: string({ required_error: "Email is required" })
-        .min(1, "Email is required")
-        .email("Invalid email"),
-    name: string({ required_error: "Name is required" }).min(
-        1,
-        "Name is required"
-    ),
-    password: string({ required_error: "Password is required" })
-        .min(1, "Password is required")
-        .min(8, "Password must be more than 8 characters")
-        .max(32, "Password must be less than 32 characters"),
-    confirmPassword: string({
-        required_error: "Confirm password is required",
-    }).min(1, "Confirm password is required"),
-}).refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"], // path of error
+    email: z.string().email("Invalid email address"),
+    name: z.string().min(1, "Name is required"),
+    password: z
+        .string()
+        .min(8, "Password must be at least 8 characters long")
+        .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+        .regex(/[a-z]/, "Password must contain at least one lowercase letter")
+        .regex(/\d/, "Password must contain at least one number")
+        .regex(/[@$!%*?&]/, "Password must contain at least one special character"),
 });
