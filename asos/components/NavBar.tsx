@@ -8,7 +8,7 @@ export default function NavBar() {
     const session = useSession();
 
     return (
-        <nav className="bg-white rounded-lg shadow dark:bg-gray-900 mb-5">
+        <nav className="bg-white rounded-lg shadow dark:bg-gray-900">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
                 <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <Image

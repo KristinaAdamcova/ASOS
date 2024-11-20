@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { authConfig } from "./auth.config";
 import { loginSchema } from "./lib/zod";
-import { fetchUser } from "./app/lib/data";
+import { fetchUserByEmail } from "./app/lib/data";
 import bcrypt from "bcrypt";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -23,7 +23,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           }
 
           const { email, password } = parsedCredentials.data;
-          const user = await fetchUser(email);
+          const user = await fetchUserByEmail(email);
           
           if (!user) return null;
 
