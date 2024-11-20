@@ -18,7 +18,7 @@ export default async function Layout({
     return (
         <div className="container mx-auto p-10 gap-5 flex flex-row">
             {/* Sidebar */}
-            <div className="w-64 bg-white shadow-lg">
+            <div className="w-64 bg-white shadow-lg rounded-lg">
                 <div className="px-4 py-10">
                     <div className="mb-6 flex flex-row align-items-start">
                         <div className="w-2/6">
