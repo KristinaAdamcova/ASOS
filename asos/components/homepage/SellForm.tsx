@@ -9,7 +9,7 @@ export default function SellForm() {
         e.preventDefault();
         setError(null);
 
-        const formData = new FormData(e.currentTarget);
+
 
         try {
 
