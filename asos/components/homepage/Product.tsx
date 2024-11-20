@@ -1,56 +1,36 @@
+import { ProductWithUser, User } from '@/app/lib/definitions';
 import Image from 'next/image';
 import React from "react";
 
-interface User {
-    name: string;
-    email: string;
+type Props = {
+    product: ProductWithUser
+    user: User | undefined
 }
 
-interface ProductProps {
-    id: number;
-    name: string;
-    photoPath: string;
-    description: string;
-    category: string;
-    price: number;
-    available: boolean;
-    city: string;
-    user?: User;
-}
-
-const Product: React.FC<ProductProps> = ({
-                                             name,
-                                             photoPath,
-                                             description,
-                                             category,
-                                             price,
-                                             available,
-                                             city,
-                                             user,
-                                         }) => {
+const Product = ({ product, user }: Props) => {
     return (
         <div
             className="flex flex-col items-center p-4 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">{name}</h2>
+            <h2 className="text-xl font-semibold text-gray-800 mb-4">{product.name}</h2>
             <Image
-                src={`/${photoPath}`}
+                src={`/${product.photoPath}`}
                 alt="Product image"
                 width={200}  // Set a width that fits with your design (larger than the actual displayed width)
                 height={100} // Fixed height
                 className="w-full h-[100px] object-contain mb-4 rounded-md"
             />
-            <p className="text-gray-600 mb-4">{description}</p>
+            <p className="text-gray-600 mb-4">{product.description}</p>
             <p className="text-gray-700 font-medium mb-2">
-                <strong>Category:</strong> {category}
+                <strong>Category:</strong> {product.category}
             </p>
             <p className="text-gray-700 font-medium mb-2">
-                <strong>Price:</strong> ${price.toFixed(2)}
+                <strong>Price:</strong> ${product.price.toFixed(2)}
             </p>
             <p className="text-gray-700 font-medium mb-2">
-                <strong>Available:</strong> {available ? 'Yes' : 'No'}
+                <strong>Available:</strong> {product.available ? 'Yes' : 'No'}
             </p>
             <p className="text-gray-700 font-medium mb-4">
-                <strong>City:</strong> {city}
+                <strong>City:</strong> {product.city}
             </p>
 
             {user && (

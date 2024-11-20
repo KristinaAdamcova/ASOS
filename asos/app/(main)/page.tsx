@@ -5,26 +5,9 @@ import Link from 'next/link';
 import SearchBar from "@/components/homepage/SearchBar";
 import Product from "@/components/homepage/Product";
 import { useSearchParams } from 'next/navigation';
+import { ProductWithUser } from '@/app/lib/definitions';
 
-type User = {
-    id: number;
-    email: string;
-    name: string;
-};
-
-type Product = {
-    photoPath: string;
-    id: number;
-    name: string;
-    description: string;
-    category: string;
-    available: boolean;
-    price: number;
-    city: string;
-    user: User | undefined;
-};
-
-async function fetchProducts(category: string | null = null): Promise<Product[]> {
+async function fetchProducts(category: string | null = null): Promise<ProductWithUser[]> {
     const query = category ? `?category=${encodeURIComponent(category)}` : '';
     const res = await fetch(`http://localhost:3000/api/products${query}`, {
         cache: 'no-store',
@@ -47,7 +30,7 @@ export default function HomePage() {
 
 function HomeContent() {
     const [searchQuery, setSearchQuery] = useState('');
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState<ProductWithUser[]>([]);
     const [category, setCategory] = useState<string | null>(null);
     const searchParams = useSearchParams();
 
@@ -79,7 +62,7 @@ function HomeContent() {
                 product.description.toLowerCase().includes(lowerCaseQuery) ||
                 product.category.toLowerCase().includes(lowerCaseQuery) ||
                 product.city.toLowerCase().includes(lowerCaseQuery) ||
-                (product.user?.name.toLowerCase().includes(lowerCaseQuery) ?? false)
+                (product.user?.name?.toLowerCase().includes(lowerCaseQuery) ?? false)
             );
         });
     }, [searchQuery, products]);
@@ -111,7 +94,7 @@ function HomeContent() {
             <div className="flex flex-wrap gap-5 mx-auto px-5 justify-center" >
                 {filteredProducts.map((product) => (
                     <Link key={product.id} href={`/products/${product.id}`}>
-                        <Product {...product} />
+                        <Product product={product} user={product.user} />
                     </Link>
                 ))}
             </div>

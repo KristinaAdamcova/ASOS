@@ -1,5 +1,6 @@
 import { Product, User } from "@prisma/client";
 import prisma from "@/lib/prisma";
+import { ProductWithUser } from "./definitions";
 
 export async function fetchUserByEmail(email: string): Promise<User | null> {
     try {
@@ -25,10 +26,11 @@ export async function fetchProduct(id: string): Promise<Product | null> {
     }
 }
 
-export async function fetchProductsByUser(userId: string): Promise<Product[]> {
+export async function fetchProductsByUser(userId: string): Promise<ProductWithUser[]> {
     try {
         const products = await prisma.product.findMany({
             where: { userId },
+            include: { user: true }
         });
         return products;
     } catch (error) {

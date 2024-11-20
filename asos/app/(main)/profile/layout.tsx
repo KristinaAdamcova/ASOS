@@ -1,6 +1,6 @@
 import { fetchUserByEmail } from "@/app/lib/data";
 import { auth } from "@/auth";
-import Link from "next/link";
+import ProfileNav from "@/components/ProfileNav";
 import { redirect } from "next/navigation";
 
 export default async function Layout({
@@ -17,8 +17,7 @@ export default async function Layout({
 
     return (
         <div className="container mx-auto p-10 gap-5 flex flex-row">
-            {/* Sidebar */}
-            <div className="w-64 bg-white shadow-lg rounded-lg">
+            <div className="w-64 bg-white shadow-lg rounded-lg h-fit">
                 <div className="px-4 py-10">
                     <div className="mb-6 flex flex-row align-items-start">
                         <div className="w-2/6">
@@ -50,25 +49,13 @@ export default async function Layout({
                             </p>
                         </div>
                     </div>
+
                     <h2 className="text-xl font-semibold text-gray-800 mb-4">Profile Menu</h2>
-                    <nav className="space-y-2">
-                        <Link href="/profile" className="block px-4 py-2 text-gray-700 hover:bg-lime-100 hover:text-lime-700 rounded-lg">
-                            Profile Overview
-                        </Link>
-                        <Link href="/profile/products" className="block px-4 py-2 text-gray-700 hover:bg-lime-100 hover:text-lime-700 rounded-lg">
-                            My Products
-                        </Link>
-                        <Link href="/profile/orders" className="block px-4 py-2 text-gray-700 hover:bg-lime-100 hover:text-lime-700 rounded-lg">
-                            My Orders
-                        </Link>
-                        <Link href="/profile/ratings" className="block px-4 py-2 text-gray-700 hover:bg-lime-100 hover:text-lime-700 rounded-lg">
-                            My Ratings
-                        </Link>
-                    </nav>
+                    
+                    <ProfileNav />
                 </div>
             </div>
 
-            {/* Main Content */}
             <main className="flex-1">
                 {children}
             </main>
