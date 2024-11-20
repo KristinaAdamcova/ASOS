@@ -1,12 +1,14 @@
-'use client';
+"use client";
 
 import {useState} from "react";
-import {useRouter} from "next/navigation";
-import {useSession} from "next-auth/react";
-import {fetchUser} from "@/app/lib/data";
+import { User } from "@prisma/client";
+import { redirect } from "next/navigation";
 
-export default function SellForm() {
-    const router = useRouter();
+type Props = {
+    user: User;
+}
+
+export default function SellForm({ user }: Props) {
     const [photoPath, setPhotoPath] = useState("");
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -16,9 +18,7 @@ export default function SellForm() {
     const [city, setCity] = useState("");
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    const { data: session, status } = useSession();
-    const email = session?.user?.email
-    const user = await fetchUser(email);
+    const email = user.email;
     const userid = user.id;
 
     console.log("email" + email);
@@ -45,7 +45,7 @@ export default function SellForm() {
             });
 
             if (res.ok) {
-                router.push("/");
+                redirect("/");
             } else {
                 const { message } = await res.json();
                 setErrorMessage(message);
