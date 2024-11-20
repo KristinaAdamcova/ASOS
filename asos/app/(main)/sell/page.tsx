@@ -2,15 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import SellForm from "@/components/homepage/SellForm";
 
-export default function LoginPage() {
+export default function SellPage() {
     return (
         <div className="min-h-screen bg-gradient-to-r from-green-300 via-green-400 to-green-500 flex flex-col justify-center items-center">
             <Link href="/asos/public" className="flex items-center space-x-3 rtl:space-x-reverse">
                 <Image
-                    src="/logo.png" // Dynamically include the product's photo path
+                    src="/logo.png"
                     alt="Description of the image"
-                    width={100}  // Specify width
-                    height={100} // Specify height
+                    width={100}
+                    height={100}
                 />
                 <span
                     className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Neighbourhood portal</span>
