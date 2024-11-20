@@ -3,6 +3,7 @@
 import {useState} from "react";
 import { User } from "@prisma/client";
 import { redirect } from "next/navigation";
+import {useSession} from "next-auth/react";
 
 type Props = {
     user: User;
@@ -13,16 +14,18 @@ export default function SellForm({ user }: Props) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
-    const [available, setAvailable] = useState("");
-    const [price, setPrice] = useState("");
+    const [available, setAvailable] = useState<number>();
+    const [price, setPrice] = useState<number>();
     const [city, setCity] = useState("");
+    const [userid, setUserId] = useState("");
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    const email = user.email;
-    const userid = user.id;
+    const { data: session, status } = useSession();
+    const session_userid = session?.user?.id
 
-    console.log("email" + email);
-    console.log("user_body" + user);
+
+    console.log("userid" + userid);
+
     {/*photoPath String*/}
     {/*name  String*/}
     {/*description  String*/}
@@ -36,6 +39,7 @@ export default function SellForm({ user }: Props) {
 
 
         try {
+            setUserId(session_userid)
 
 
             const res = await fetch("/api/sell", {

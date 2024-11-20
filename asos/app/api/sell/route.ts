@@ -1,8 +1,16 @@
 import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
-import { Product } from "@prisma/client";
 
-type CreateProductReqBody = Omit<Product, "id">;
+type CreateProductReqBody = {
+    "photoPath": "string",
+    "name": "string",
+    "description": "string",
+    "category": "string",
+    "available": 0,
+    "price": 0.0,
+    "city": "string",
+    "userId": "string"
+}
 
 export const POST = async (req: NextRequest) => {
     try {
