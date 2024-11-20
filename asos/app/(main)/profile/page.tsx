@@ -35,7 +35,7 @@ export default function Profile() {
         );
     }
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
@@ -43,7 +43,7 @@ export default function Profile() {
         }));
     };
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Here, you'd send the updated data to your backend or API
         console.log('Updated profile:', formData);
