@@ -1,9 +1,8 @@
 "use client";
 
-import {useState} from "react";
-import { User } from "@prisma/client";
+import { useState } from "react";
 import { redirect } from "next/navigation";
-import {useSession} from "next-auth/react";
+import { User } from "@/app/lib/definitions";
 
 type Props = {
     user: User;
@@ -17,35 +16,33 @@ export default function SellForm({ user }: Props) {
     const [available, setAvailable] = useState<number>();
     const [price, setPrice] = useState<number>();
     const [city, setCity] = useState("");
-    const [userid, setUserId] = useState("");
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    const { data: session, status } = useSession();
-    const session_userid = session?.user?.id
-
-
-    console.log("userid" + userid);
-
-    {/*photoPath String*/}
-    {/*name  String*/}
-    {/*description  String*/}
-    {/*category  String*/}
-    {/*available Int*/}
-    {/*price Float*/}
-    {/*city  String*/}
+    {/*photoPath String*/ }
+    {/*name  String*/ }
+    {/*description  String*/ }
+    {/*category  String*/ }
+    {/*available Int*/ }
+    {/*price Float*/ }
+    {/*city  String*/ }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-
         try {
-            setUserId(session_userid)
-
-
             const res = await fetch("/api/sell", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ photoPath, name, description,category, available, price, city, userid}),
+                body: JSON.stringify({
+                    photoPath: photoPath,
+                    name: name,
+                    description: description,
+                    category: category,
+                    available: available,
+                    price: price,
+                    city: city,
+                    userId: user?.id,
+                }),
             });
 
             if (res.ok) {
@@ -122,7 +119,7 @@ export default function SellForm({ user }: Props) {
                     id="price"
                     type="number"
                     value={price}
-                    onChange={(e) => setPrice(e.target.value)}
+                    onChange={(e) => setPrice(Number(e.target.value))}
 
                     placeholder="Enter your price"
                     className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -136,7 +133,7 @@ export default function SellForm({ user }: Props) {
                     id="availability"
                     type="number"
                     value={available}
-                    onChange={(e) => setAvailable(e.target.value)}
+                    onChange={(e) => setAvailable(Number(e.target.value))}
 
                     placeholder="Enter count"
                     className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"

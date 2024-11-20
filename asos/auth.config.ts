@@ -15,6 +15,13 @@ export const authConfig = {
       }
       return session;
     },
+    async jwt({ token, user }) {
+      if (user) {
+        token.sub = user.id;
+      }
+      
+      return token;
+    },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const protectedPaths = ["/profile", "/profile/*", "/sell"];

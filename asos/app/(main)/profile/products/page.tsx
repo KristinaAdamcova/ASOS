@@ -7,15 +7,11 @@ export default async function Products() {
     const session = await auth();
     const user = session?.user;
 
-    console.log(user);
-
     if (!user) {
         redirect("/login");
     }
 
-    const products = await fetchProductsByUser(user.id);
-
-    console.log(products);
+    const products = user.id ? await fetchProductsByUser(user.id) : [];
     
     return (
         <div className="flex justify-center items-center">
@@ -31,6 +27,12 @@ export default async function Products() {
                         + Add Product
                     </button>
                 </div>
+
+                {products.map((product) => (
+                    <div key={product.id}>
+                        <h2>{product.name}</h2>
+                    </div>
+                ))}
             </div>
         </div>
     );

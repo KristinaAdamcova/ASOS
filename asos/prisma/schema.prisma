@@ -14,90 +14,48 @@ datasource db {
 }
 
 model User {
-  id    String     @id @default(cuid())
-  email String  @unique
-  name  String?
-  password String
-  products Product[]
-  histories History[]
-  ratingsGiven     Rating[] @relation("RatingsGiven")
-  ratingsReceived  Rating[] @relation("RatingsReceived")
-  
-  // for next-auth
-  emailVerified DateTime?
-  accounts      Account[]
-  sessions      Session[]
-}
+  id              String       @id @default(cuid())
+  email           String    @unique
+  name            String?
+  password        String
+  products        Product[] // Relation field
+  histories       History[]
+  ratingsGiven    Rating[]  @relation("RatingsGiven")
+  ratingsReceived Rating[]  @relation("RatingsReceived")
 
-model Account {
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
- 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
- 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
-  @@id([provider, providerAccountId])
-}
- 
-model Session {
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
- 
-model VerificationToken {
-  identifier String
-  token      String
-  expires    DateTime
- 
-  @@id([identifier, token])
+  emailVerified DateTime?
 }
 
 model Product {
-  id    String     @id @default(cuid())
-  photoPath String
-  name  String
-  description  String
-  category  String
-  available Int
-  price Float
-  city  String
-  userId  String
-  user    User   @relation(fields: [userId], references: [id])
-  histories History[]
+  id          String    @id @default(cuid())
+  photoPath   String
+  name        String
+  description String
+  category    String
+  available   Int
+  price       Float
+  city        String
+  userId      String
+  user        User      @relation(fields: [userId], references: [id])
+  histories   History[]
+  createdAt   DateTime  @default(now())
 }
 
 model History {
-  id    String     @id @default(cuid())
-  userId  String
-  user    User   @relation(fields: [userId], references: [id])
-  productId  String
-  product    Product   @relation(fields: [productId], references: [id])
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  productId String
+  product   Product  @relation(fields: [productId], references: [id])
   timestamp DateTime @default(now())
 }
 
 model Rating {
-  id    String     @id @default(cuid())
-  ratedById  String
-  ratedToId  String
+  id          String @id @default(cuid())
+  ratedById   String
+  ratedToId   String
   description String
-  rating Int
-  ratedBy      User  @relation("RatingsGiven", fields: [ratedById], references: [id])
-  ratedTo      User  @relation("RatingsReceived", fields: [ratedToId], references: [id])
-
+  rating      Int
+  ratedBy     User   @relation("RatingsGiven", fields: [ratedById], references: [id])
+  ratedTo     User   @relation("RatingsReceived", fields: [ratedToId], references: [id])
 }

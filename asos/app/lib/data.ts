@@ -14,15 +14,25 @@ export async function fetchUserByEmail(email: string): Promise<User | null> {
 }
 
 export async function fetchProduct(id: string): Promise<Product | null> {
-    const product = await prisma.product.findUnique({
-        where: { id: id },
-    });
-    return product;
+    try {
+        const product = await prisma.product.findUnique({
+            where: { id },
+        });
+        return product;
+    } catch (error) {
+        console.error("Failed to fetch product:", error);
+        throw new Error("Failed to fetch product.");
+    }
 }
 
 export async function fetchProductsByUser(userId: string): Promise<Product[]> {
-    const products = await prisma.product.findMany({
-        where: { userId: userId },
-    });
-    return products;
+    try {
+        const products = await prisma.product.findMany({
+            where: { userId },
+        });
+        return products;
+    } catch (error) {
+        console.error("Failed to fetch products:", error);
+        throw new Error("Failed to fetch products.");
+    }
 }
