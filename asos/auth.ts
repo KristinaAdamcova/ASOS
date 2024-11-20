@@ -5,8 +5,6 @@ import { loginSchema } from "./lib/zod";
 import { fetchUser } from "./app/lib/data";
 import bcrypt from "bcrypt";
 
-// ... existing imports ...
-
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [

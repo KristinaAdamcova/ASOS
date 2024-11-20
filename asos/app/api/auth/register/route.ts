@@ -1,25 +1,14 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import { z } from "zod";
-
-// Define the schema for validation with stronger password requirements
-const registerSchema = z.object({
-    email: z.string().email("Invalid email address"),
-    name: z.string().min(1, "Name is required"),
-    password: z
-        .string()
-        .min(8, "Password must be at least 8 characters long")
-        .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-        .regex(/[a-z]/, "Password must contain at least one lowercase letter")
-        .regex(/\d/, "Password must contain at least one number")
-        .regex(/[@$!%*?&]/, "Password must contain at least one special character"),
-});
+import { registerSchema } from "@/lib/zod";
 
 export async function POST(request: Request) {
     try {
         const { email, name, password } = await request.json();
 
+        console.log(email, name, password);
+        
         // Validate input using zod schema
         const validation = registerSchema.safeParse({ email, name, password });
         if (!validation.success) {
@@ -50,6 +39,13 @@ export async function POST(request: Request) {
                 password: hashedPassword,
             },
         });
+
+        if (!newUser) {
+            return NextResponse.json(
+                { message: "Failed to create user" },
+                { status: 500 }
+            );
+        }
 
         return NextResponse.json(
             { message: "User registered successfully" },

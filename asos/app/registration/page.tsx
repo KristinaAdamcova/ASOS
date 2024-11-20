@@ -1,8 +1,16 @@
+import { auth } from "@/auth";
 import RegistrationForm from "@/components/auth/RegistrationForm";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function RegistrationPage() {
+export default async function RegistrationPage() {
+    const session = await auth();
+
+    if (session?.user) {
+        redirect('/');
+    }
+
     return (
         <div className="min-h-screen bg-gradient-to-r from-green-300 via-green-400 to-green-500 flex flex-col justify-center items-center">
             <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">

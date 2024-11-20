@@ -7,7 +7,6 @@ import Link from "next/link";
 export default function NavBar() {
     const session = useSession();
 
-    console.log(session);
     return (
         <nav className="bg-white rounded-lg shadow dark:bg-gray-900 mb-5">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">

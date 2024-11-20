@@ -1,10 +1,6 @@
 # TODO FILE
 
-### LOGIN / REGISTER 
-
-- dorobit registraciu
-
-### VSEOBECNE
+## VSEOBECNE
 
 - vytvorit novy page kde vyplni dotaznik na pridanie noveho produktu
   - tato cesta bude spristupnena iba loginnutemu userovi
