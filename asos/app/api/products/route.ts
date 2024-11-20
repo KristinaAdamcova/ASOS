@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const GET = async (req: NextRequest) => {
     try {
-        const { searchParams } = new URL(req.url);
+        const searchParams = req.nextUrl.searchParams;
         let category = searchParams.get("category");
 
         if (category === 'vsetko') {
@@ -24,9 +24,7 @@ export const GET = async (req: NextRequest) => {
             },
         });
 
-        // Transform the response to match the existing structure
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const formattedProducts = products.map(({ userId, user, ...product }) => ({
+        const formattedProducts = products.map(({ user, ...product }) => ({
             ...product,
             user: user ? {
                 id: user.id,

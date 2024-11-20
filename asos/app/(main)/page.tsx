@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import SearchBar from "@/components/homepage/SearchBar";
 import Product from "@/components/homepage/Product";
@@ -37,7 +37,15 @@ async function fetchProducts(category: string | null = null): Promise<Product[]>
     return await res.json();
 }
 
-export default function Home() {
+export default function HomePage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <HomeContent />
+        </Suspense>
+    );
+}
+
+function HomeContent() {
     const [searchQuery, setSearchQuery] = useState('');
     const [products, setProducts] = useState<Product[]>([]);
     const [category, setCategory] = useState<string | null>(null);

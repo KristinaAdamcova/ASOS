@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ProductDetail from "@/components/products/ProductDetail";
 import { Product } from "@prisma/client";
@@ -15,7 +15,15 @@ const fetchProduct = async (id: string | null) => {
     return response.json(); // Ensure this returns a single product object
 };
 
-const ProductPage = () => {
+export default function ProductPage() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <ProductContent />
+        </Suspense>
+    );
+}
+
+function ProductContent() {
     const searchParams = useSearchParams();
     const [product, setProduct] = useState<Product | null>(null);
     const [error, setError] = useState<string | null>(null);
@@ -53,6 +61,4 @@ const ProductPage = () => {
             <ProductDetail product={product} />
         </div>
     );
-};
-
-export default ProductPage;
+}
