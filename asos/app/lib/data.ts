@@ -38,3 +38,22 @@ export async function fetchProductsByUser(userId: string): Promise<ProductWithUs
         throw new Error("Failed to fetch products.");
     }
 }
+
+export async function fetchRatingsByUser(userId: string) {
+    try {
+        const ratingsGiven = await prisma.rating.findMany({
+            where: { ratedById: userId },
+            include: { ratedTo: true },
+        });
+
+        const ratingsReceived = await prisma.rating.findMany({
+            where: { ratedToId: userId },
+            include: { ratedBy: true },
+        });
+
+        return { ratingsGiven, ratingsReceived };
+    } catch (error) {
+        console.error("Failed to fetch ratings:", error);
+        throw new Error("Failed to fetch ratings.");
+    }
+}
