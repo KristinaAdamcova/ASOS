@@ -4,9 +4,19 @@ import { auth } from "@/auth";
 
 export default async function Ratings() {
     const session = await auth();
-    let ratingsGiven = [];
-    let ratingsReceived = [];
-    let error = null;
+    let ratingsGiven: Array<{
+        id: string;
+        ratedTo: { name: string | null };
+        rating: number;
+        description: string;
+    }> = [];
+    let ratingsReceived: Array<{
+        id: string;
+        ratedBy: { name: string | null };
+        rating: number;
+        description: string;
+    }> = [];
+    let error: string | null = null;
 
     try {
         if (session?.user?.id) {
