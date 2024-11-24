@@ -1,9 +1,12 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
+import {signIn, useSession} from 'next-auth/react';
+import PhotoUpload from '@/components/profile/PhotoUpload';
+
 
 export default function Profile() {
+
     const { data: session, status } = useSession();
     const [isClient, setIsClient] = useState(false);
     const [formData, setFormData] = useState({
@@ -43,11 +46,31 @@ export default function Profile() {
         }));
     };
 
-    const handleFormSubmit = (e: React.FormEvent) => {
+    const handleFormSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Here, you'd send the updated data to your backend or API
-        console.log('Updated profile:', formData);
-        alert('Profile updated successfully!');
+
+        try {
+            const response = await fetch('/api/profile', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                console.log('Profile updated successfully:', data);
+                await signIn('credentials', { redirect: false });
+                alert('Profile updated successfully!');
+            } else {
+                console.error('Failed to update profile:', response.statusText);
+                alert('Failed to update profile. Please try again.');
+            }
+        } catch (error) {
+            console.error('An error occurred:', error);
+            alert('An error occurred while updating your profile.');
+        }
     };
 
     return (
@@ -93,6 +116,7 @@ export default function Profile() {
                         Update Profile
                     </button>
                 </form>
+                <PhotoUpload currentPhotoUrl={session?.user?.image ?? undefined} />
             </div>
         </div>
     );
