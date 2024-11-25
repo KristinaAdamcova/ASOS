@@ -7,14 +7,14 @@ type Props = {
     user: User | undefined
 }
 
-const Product = ({ product, user }: Props) => {
+const ProductBuy = ({ product, user }: Props) => {
     return (
         <div
             className="flex flex-col items-center p-4 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
             <h2 className="text-xl font-semibold text-gray-800 mb-4">{product.name}</h2>
             <Image
                 src={`/${product.photoPath}`}
-                alt="Product image"
+                alt="ProductBuy image"
                 width={200}  // Set a width that fits with your design (larger than the actual displayed width)
                 height={100} // Fixed height
                 className="w-full h-[100px] object-contain mb-4 rounded-md"
@@ -54,4 +54,4 @@ const Product = ({ product, user }: Props) => {
     );
 };
 
-export default Product;
+export default ProductBuy;

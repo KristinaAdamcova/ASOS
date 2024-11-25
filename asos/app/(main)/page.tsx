@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useMemo, Suspense } from 'react';
 import Link from 'next/link';
 import SearchBar from "@/components/homepage/SearchBar";
-import Product from "@/components/homepage/Product";
+import ProductBuy from "@/components/homepage/ProductBuy";
 import { useSearchParams } from 'next/navigation';
 import { ProductWithUser } from '@/app/lib/definitions';
 
@@ -94,7 +94,7 @@ function HomeContent() {
             <div className="flex flex-wrap gap-5 mx-auto px-5 justify-center" >
                 {filteredProducts.map((product) => (
                     <Link key={product.id} href={`/products/${product.id}`}>
-                        <Product product={product} user={product.user} />
+                        <ProductBuy product={product} user={product.user} />
                     </Link>
                 ))}
             </div>

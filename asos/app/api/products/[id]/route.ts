@@ -23,3 +23,30 @@ export const GET = async (req: NextRequest, { params }: { params: { id: string }
         return NextResponse.json({ message: "Internal server error" }, { status: 500 });
     }
 };
+
+
+// DELETE Method: Delete product by ID
+export const DELETE = async (req: NextRequest, { params }: { params: { id: string } }) => {
+    try {
+        const { id } = params;
+
+        // Check if the product exists
+        const existingProduct = await prisma.product.findUnique({
+            where: { id: id },
+        });
+
+        if (!existingProduct) {
+            return NextResponse.json({ message: "Product not found" }, { status: 404 });
+        }
+
+        // Delete the product
+        await prisma.product.delete({
+            where: { id: id },
+        });
+
+        return NextResponse.json({ message: "Product deleted successfully" });
+    } catch (error) {
+        console.error("Error deleting product:", error);
+        return NextResponse.json({ message: "Internal server error" }, { status: 500 });
+    }
+};

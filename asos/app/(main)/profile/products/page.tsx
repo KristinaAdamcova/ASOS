@@ -1,13 +1,13 @@
-import { fetchProductsByUser } from "@/app/lib/data";
-import { auth } from "@/auth";
-import Product from "@/components/homepage/Product";
-import Link from "next/link";
+import {fetchProductsByUser} from "@/app/lib/data";
+import {auth} from "@/auth";
 import React from "react";
+import ProductDelete from "@/components/profile/ProductDelete";
+import Link from "next/link";
 
 export default async function Products() {
     const session = await auth();
     const products = session?.user?.id ? await fetchProductsByUser(session.user.id) : [];
-    
+
     console.log(products);
     return (
         <div className="flex justify-center items-center">
@@ -18,16 +18,17 @@ export default async function Products() {
 
                 </p>
                 <div className="flex justify-center">
-                    <button
-                        className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded shadow-md mb-4">
-                        + Add Product
-                    </button>
+                    <Link href={"/sell"}>
+                        <button
+                            className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded shadow-md mb-4">
+                            + Add Product
+                        </button>
+                    </Link>
                 </div>
 
                 {products.map((product) => (
-                    <Link key={product.id} href={`/products/${product.id}`}>
-                        <Product product={product} user={session?.user} />
-                    </Link>
+                    // eslint-disable-next-line react/jsx-key
+                    <ProductDelete product={product} user={session?.user}/>
                 ))}
             </div>
         </div>
