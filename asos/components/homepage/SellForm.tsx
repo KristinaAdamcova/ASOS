@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { redirect } from "next/navigation";
+import { useRouter} from "next/navigation";
 import { User } from "@/app/lib/definitions";
 
 type Props = {
@@ -9,51 +9,70 @@ type Props = {
 }
 
 export default function SellForm({ user }: Props) {
-    const [photoPath, setPhotoPath] = useState("");
+    const router = useRouter();
+
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("product");
     const [available, setAvailable] = useState<number>();
     const [price, setPrice] = useState<number>();
     const [city, setCity] = useState("");
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    {/*photoPath String*/ }
-    {/*name  String*/ }
-    {/*description  String*/ }
-    {/*category  String*/ }
-    {/*available Int*/ }
-    {/*price Float*/ }
-    {/*city  String*/ }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setErrorMessage(null);
+
+        const fileInput = document.querySelector('#user_avatar') as HTMLInputElement;
+        const file = fileInput?.files?.[0];
+
+        if (!file) {
+            setErrorMessage("Please select a product photo");
+            return;
+        }
 
         try {
-            const res = await fetch("/api/sell", {
-                method: "POST",
+            // Upload the photo
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const uploadRes = await fetch('/api/sell/upload', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!uploadRes.ok) throw new Error("Photo upload failed");
+
+            const { photoUrl } = await uploadRes.json();
+
+            // Create the product
+            const res = await fetch('/api/sell', {
+                method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    photoPath: photoPath,
-                    name: name,
-                    description: description,
-                    category: category,
-                    available: available,
-                    price: price,
-                    city: city,
+                    name,
+                    description,
+                    category,
+                    available,
+                    price,
+                    city,
+                    photoPath: photoUrl,
                     userId: user?.id,
                 }),
             });
 
-            if (res.ok) {
-                redirect("/");
-            } else {
+            if (!res.ok) {
                 const { message } = await res.json();
                 setErrorMessage(message);
+                return;
             }
+
+            alert("Product successfully published!");
+            router.push("/");
         } catch (error) {
             console.error("Error:", error);
-            setErrorMessage("An error occurred");
+            setErrorMessage("An error occurred while uploading");
         }
     };
 
@@ -97,7 +116,7 @@ export default function SellForm({ user }: Props) {
                 />
             </div>
             <div className="mb-4">
-                <label htmlFor="category" className="block text-sm font-medium text-gray-700">Description</label>
+                <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
                 <select
                     name="category"
                     id="category"
@@ -160,8 +179,6 @@ export default function SellForm({ user }: Props) {
                 <input
                     className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                     id="user_avatar" name="user_avatar" type="file"
-                    value={photoPath}
-                    onChange={(e) => setPhotoPath(e.target.value)}
                 />
             </div>
             <button
