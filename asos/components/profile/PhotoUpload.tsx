@@ -1,12 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
-import {signIn} from "next-auth/react";
 
 
-export default function PhotoUpload({ currentPhotoUrl }: { currentPhotoUrl?: string }) {
-    const [photoUrl, setPhotoUrl] = useState(currentPhotoUrl);
+export default function PhotoUpload() {
     const [isUploading, setIsUploading] = useState(false);
 
     const handlePhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,14 +23,8 @@ export default function PhotoUpload({ currentPhotoUrl }: { currentPhotoUrl?: str
 
             if (!response.ok) throw new Error('Upload failed');
 
-            if (response.ok) {
-                // Trigger session update to reflect the changes
-                await signIn('credentials', { redirect: false });
-                alert('Profile updated successfully!');
-            }
+            window.location.reload();
 
-            const data = await response.json();
-            setPhotoUrl(data.photoUrl);
         } catch (error) {
             console.error('Error uploading photo:', error);
         } finally {
@@ -42,19 +33,7 @@ export default function PhotoUpload({ currentPhotoUrl }: { currentPhotoUrl?: str
     };
 
     return (
-        <div className="flex flex-col items-center gap-4">
-            {photoUrl ? (
-                <Image
-                    src={photoUrl}
-                    alt="Profile photo"
-                    width={100}
-                    height={100}
-                    className="rounded-full"
-                />
-            ) : (
-                <div className="w-24 h-24 bg-gray-200 rounded-full" />
-            )}
-
+        <div className="flex flex-col items-start gap-2 mt-2">
             <label className="cursor-pointer">
                 <input
                     type="file"
@@ -63,9 +42,9 @@ export default function PhotoUpload({ currentPhotoUrl }: { currentPhotoUrl?: str
                     onChange={handlePhotoUpload}
                     disabled={isUploading}
                 />
-                <span className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
-                    {isUploading ? 'Uploading...' : 'Upload Photo'}
-                </span>
+                <span className="px-3 py-1.5 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm">
+                {isUploading ? 'Uploading...' : 'Upload Photo'}
+            </span>
             </label>
         </div>
     );
