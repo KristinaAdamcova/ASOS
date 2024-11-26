@@ -10,3 +10,10 @@ export type User = {
 export type ProductWithUser = Product & {
     user: User | undefined
 }
+
+export type CreateRating = {
+    ratedById: string;
+    ratedToId: string;
+    rating: number;
+    description: string;
+}

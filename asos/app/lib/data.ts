@@ -1,6 +1,6 @@
 import { Product, User } from "@prisma/client";
 import prisma from "@/lib/prisma";
-import { ProductWithUser } from "./definitions";
+import { CreateRating, ProductWithUser } from "./definitions";
 
 export async function fetchUserByEmail(email: string): Promise<User | null> {
     try {
@@ -48,6 +48,15 @@ export async function fetchProductsByUser(userId: string): Promise<ProductWithUs
     } catch (error) {
         console.error("Failed to fetch products:", error);
         throw new Error("Failed to fetch products.");
+    }
+}
+
+export async function createRating(rating: CreateRating) {
+    try {
+        await prisma.rating.create({ data: rating });
+    } catch (error) {
+        console.error("Failed to create rating:", error);
+        throw new Error("Failed to create rating.");
     }
 }
 
