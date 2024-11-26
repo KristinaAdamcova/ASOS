@@ -1,39 +1,17 @@
 import React from "react";
 import {auth} from "@/auth"
 import {fetchOrdersByUser, fetchProduct} from "@/app/lib/data";
-import {Product} from "@prisma/client";
-import prisma from "@/lib/prisma";
 import Image from "next/image";
 
 export default async function Orders() {
-
     const session = await auth();
 
-    let orders: Array<{
-        id: string;
-        userId: string;
-        productId: string;
-        timestamp: string;
-    }> = [];
-
-    let error: string | null = null;
-    let products: any[] = [];;
-    let users: any[] = [];
-
-    try {
-        if (session?.user?.id) {
-            orders = await fetchOrdersByUser(session.user.id)
-
-            for (const order of orders) {
-                console.log(order);
-                products.push(await fetchProduct(order.productId));  // Appends each order to products
-            }
-            console.log(products)
-        }
-    } catch (err) {
-        error = "Failed to fetch your ratings.";
-        console.error(err);
+    if (!session?.user?.id) {
+        return <div>You are not logged in</div>;
     }
+
+    const orders = await fetchOrdersByUser(session.user.id)
+    const products = await Promise.all(orders.map(async (order) => await fetchProduct(order.productId)))
 
     return (
         <div className="flex justify-center items-center">
@@ -43,12 +21,12 @@ export default async function Orders() {
                     <ul className="mt-4">
                         {products.map((product) => (
                             <li
-                                key={product.id}
+                                key={product?.id}
                                 className="border-b py-4 flex items-start"
                             >
                                 <div className="w-1/4">
                                     <Image
-                                        src={`/${product.photoPath}`}
+                                        src={`/${product?.photoPath}`}
                                         alt="Product image"
                                         width={50} // Adjust size as needed
                                         height={50} // Adjust size as needed
@@ -57,13 +35,13 @@ export default async function Orders() {
                                 </div>
                                 <div className="w-3/4 pl-4 flex flex-col">
                                     <p className="text-lg font-medium text-gray-700">
-                                        <strong>Name:</strong> {product.name}
+                                        <strong>Name:</strong> {product?.name}
                                     </p>
                                     <p className="text-lg text-gray-700">
-                                        <strong>Category:</strong> {product.category}
+                                        <strong>Category:</strong> {product?.category}
                                     </p>
                                     <p className="text-lg text-gray-700">
-                                        <strong>Price:</strong> {product.price}
+                                        <strong>Price:</strong> {product?.price}
                                     </p>
                                 </div>
                             </li>

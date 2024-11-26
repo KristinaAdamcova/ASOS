@@ -64,7 +64,7 @@ export async function fetchOrdersByUser(userId: string) {
             where: { userId: userId }
         });
 
-        return orders ;
+        return orders;
     } catch (error) {
         console.error("Failed to fetch ratings:", error);
         throw new Error("Failed to fetch ratings.");
