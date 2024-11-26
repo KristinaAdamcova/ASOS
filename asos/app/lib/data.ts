@@ -57,3 +57,16 @@ export async function fetchRatingsByUser(userId: string) {
         throw new Error("Failed to fetch ratings.");
     }
 }
+
+export async function fetchOrdersByUser(userId: string) {
+    try {
+        const orders = await prisma.history.findMany({
+            where: { userId: userId }
+        });
+
+        return orders ;
+    } catch (error) {
+        console.error("Failed to fetch ratings:", error);
+        throw new Error("Failed to fetch ratings.");
+    }
+}
