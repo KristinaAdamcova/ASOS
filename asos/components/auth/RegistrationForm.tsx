@@ -43,7 +43,7 @@ export default function RegisterForm() {
     };
 
     return (
-        <form className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg" onSubmit={handleSubmit}>
+        <form className="max-w-md mx-auto p-2 bg-white rounded-lg" onSubmit={handleSubmit}>
             {errorMessage && (
                 <div className="mb-4 text-red-500 text-sm">{errorMessage}</div>
             )}
@@ -54,7 +54,7 @@ export default function RegisterForm() {
                     name="email"
                     type="email"
                     placeholder="Enter your email"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-700 shadow-lg"
                     required
                 />
             </div>
@@ -65,7 +65,7 @@ export default function RegisterForm() {
                     name="name"
                     type="text"
                     placeholder="Enter your name"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-700 shadow-lg"
                     required
                 />
             </div>
@@ -76,7 +76,7 @@ export default function RegisterForm() {
                     name="password"
                     type="password"
                     placeholder="Enter your password"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-700 shadow-lg"
                     required
                 />
             </div>
@@ -87,13 +87,14 @@ export default function RegisterForm() {
                     name="confirmPassword"
                     type="password"
                     placeholder="Confirm your password"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-700 shadow-lg"
                     required
                 />
             </div>
             <button
                 type="submit"
-                className="w-full py-3 mt-4 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full text-xl py-3 mt-4 bg-green-500 text-white font-semibold rounded-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-lg"
+                style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
             >
                 Register
             </button>

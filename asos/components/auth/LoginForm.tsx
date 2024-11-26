@@ -37,7 +37,7 @@ export default function LoginForm() {
     return (
         <form 
             onSubmit={handleSubmit}
-            className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg"
+            className="max-w-md mx-auto p-4 bg-white rounded-lg"
         >
             {error && (
                 <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
@@ -51,7 +51,7 @@ export default function LoginForm() {
                     id="email"
                     type="email"
                     placeholder="Enter your email"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-700 shadow-lg"
                     required
                 />
             </div>
@@ -62,13 +62,14 @@ export default function LoginForm() {
                     id="password"
                     type="password"
                     placeholder="Enter your password"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-700 shadow-lg"
                     required
                 />
             </div>
             <button
                 type="submit"
-                className="w-full py-3 mt-4 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full text-xl py-3 mt-4 bg-green-500 text-white font-semibold rounded-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-lg"
+                style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
             >
                 Login
             </button>
