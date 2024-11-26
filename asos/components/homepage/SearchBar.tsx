@@ -44,13 +44,13 @@ export default function SearchBar({ onSearch }: { onSearch: (query: string) => v
                     id="default-search"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-lime-500 focus:border-lime-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+                    className="block w-full p-4 ps-10 text-sm text-black border border-gray-400  rounded-lg bg-white focus:ring-lime-600 focus:border-lime-600 focus:outline-none shadow-lg"
                     placeholder="Search Products, Descriptions ..."
 
                 />
                 <button
                     type="submit"
-                    className="text-white absolute end-2.5 bottom-2.5 bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800"
+                    className="text-white absolute end-2.5 bottom-2.5 bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800 shadow-lg"
                 >
                     Search
                 </button>
