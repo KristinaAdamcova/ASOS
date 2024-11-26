@@ -2,10 +2,10 @@
 
 ## VSEOBECNE
 
-- dokoncit page na prehlad produktu, proste len ked sa klikne na produkt (?neviem co tam este chceme?)(rating sellera?)
-- objednavkovy formular, celkovo objednavaci system
-- zobrazenie produktov ineho pouzivatela
-- ~~zobrazenie objednavok pouzivatela (historie)~~
-- napisanie ratingu inemu pouzivatelovi
-- ~~vymazanie produktu z ponuky, v uzivatelovi v sprave produktov namiesto gombika buy dat delete~~
-
+- [ ] rozdelit na /account = tvoj profil a /profile/:id = profil ineho uzivatela
+- [ ] vytvorit stranku cudzieho uzivatela
+- [ ] zobrazenie + pridanie ratingu pouzivatela
+- [ ] prerobit zobrazenie profilu pri produkte
+- [ ] formular objednavky
+- [ ] uprava produktu
+- [ ] dorobit vzhlad stranky
