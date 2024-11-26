@@ -10,58 +10,60 @@ type Props = {
 const ProductBuy = ({ product, user }: Props) => {
     return (
         <div
-            className="flex flex-col items-center p-4 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">{product.name}</h2>
+            className="flex flex-col p-4 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-white">
+            {/* Title */}
+            <h2 className="text-xl font-bold text-gray-800 mb-4 text-center">{product.name}</h2>
+            {/* Product Image */}
             <Image
                 src={`/${product.photoPath}`}
                 alt="ProductBuy image"
-                width={200}  // Set a width that fits with your design (larger than the actual displayed width)
-                height={100} // Fixed height
-                className="w-full h-[100px] object-contain mb-4 rounded-md"
+                width={200}
+                height={200}
+                className="w-full h-[150px] object-contain mb-4 rounded-md"
             />
-            <p className="text-gray-600 mb-4">{product.description}</p>
-            <p className="text-gray-700 font-medium mb-2">
-                <strong>Category:</strong> {product.category}
-            </p>
-            <p className="text-gray-700 font-medium mb-2">
-                <strong>Price:</strong> ${product.price.toFixed(2)}
-            </p>
-            <p className="text-gray-700 font-medium mb-2">
-                <strong>Available:</strong> {product.available ? 'Yes' : 'No'}
-            </p>
-            <p className="text-gray-700 font-medium mb-4">
-                <strong>City:</strong> {product.city}
-            </p>
-
+            {/* Product Details */}
+            <div className="flex flex-col space-y-2 mb-4 text-left">
+                <p className="text-gray-700">
+                    <span className="font-medium">Description:</span> {product.description}
+                </p>
+                <p className="text-gray-700">
+                    <span className="font-medium">Category:</span> {product.category}
+                </p>
+                <p className="text-gray-700">
+                    <span className="font-medium">Price:</span> ${product.price.toFixed(2)}
+                </p>
+                <p className="text-gray-700">
+                    <span className="font-medium">Available:</span> {product.available ? 'Yes' : 'No'}
+                </p>
+                <p className="text-gray-700">
+                    <span className="font-medium">City:</span> {product.city}
+                </p>
+            </div>
+            {/* Divider */}
+            <hr className="my-4 border-gray-300"/>
+            {/* Seller Information */}
             {user && (
-                <div className="mt-4">
-                    <h3 className="text-lg font-semibold text-gray-800">Seller Information</h3>
-                    <p className="text-gray-700">
-                        <strong>Name:</strong> {user.name}
-                    </p>
-                    <p className="text-gray-700">
-                        <strong>Email:</strong> {user.email}
-                    </p>
-                    <p>
-                        <strong>toto spravit nejako krajsie ze mala fotka v gulicke, meno,
-                            </strong> {user.image}
-                        <Image
-                            src={`${user.image}`}
-                            alt="Profile picture"
-                            width={100}  // Set a width that fits with your design (larger than the actual displayed width)
-                            height={50} // Fixed height
-                            className="w-full h-[100px] object-contain mb-4 rounded-md"
-                        />
-                    </p>
+                <div className="flex items-center space-x-3 mb-4">
+                    <Image
+                        src={user.image}
+                        alt="Seller profile picture"
+                        width={50}
+                        height={50}
+                        className="w-12 h-12 rounded-full object-cover"
+                    />
+                    <div className="text-gray-700">
+                        <p className="font-bold">{user.name}</p>
+                        <p className="text-sm text-gray-500">Seller</p>
+                    </div>
                 </div>
             )}
-            <div className="mt-auto">
-                <button
-                    className="mt-2 w-full text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800">
-                    Buy
-                </button>
-            </div>
+            {/* Call-to-Action Button */}
+            <button
+                className="w-full text-white bg-lime-600 hover:bg-lime-700 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-300">
+                Buy Now
+            </button>
         </div>
+
     );
 };
 

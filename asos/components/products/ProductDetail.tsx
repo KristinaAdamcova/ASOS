@@ -15,65 +15,64 @@ const Product = async ({ product }: Props) => {
 
     return (
         <div
-            className="flex flex-row items-start p-6 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300">
+            className="flex flex-col lg:flex-row p-6 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-white">
             {/* Image Section */}
-            <div className="w-1/3">
+            <div className="lg:w-1/3 mb-6 lg:mb-0">
                 <Image
                     src={`/${product.photoPath}`}
                     alt="Product image"
-                    width={400}  // Adjust as needed for your design
-                    height={300} // Adjust as needed for your design
-                    className="w-full h-auto object-cover rounded-md"
+                    width={400}
+                    height={300}
+                    className="w-full h-auto object-contain rounded-md"
                 />
             </div>
 
             {/* Text Section */}
-            <div className="w-2/3 pl-6 flex flex-col">
-                <h2 className="text-2xl font-semibold text-gray-800 mb-4">{product.name}</h2>
-                <p className="text-gray-600 mb-4">{product.description}</p>
-                <p className="text-gray-700 font-medium mb-2">
-                    <strong>Category:</strong> {product.category}
-                </p>
-                <p className="text-gray-700 font-medium mb-2">
-                    <strong>Price:</strong> ${product.price.toFixed(2)}
-                </p>
-                <p className="text-gray-700 font-medium mb-2">
-                    <strong>Available:</strong> {product.available ? 'Yes' : 'No'}
-                </p>
-                <p className="text-gray-700 font-medium mb-4">
-                    <strong>City:</strong> {product.city}
-                </p>
+            <div className="lg:w-2/3 lg:pl-6 flex flex-col">
+                {/* Product Information */}
+                <h2 className="text-3xl font-bold text-gray-800 mb-4">{product.name}</h2>
+                <p className="text-gray-600 mb-6">{product.description}</p>
 
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                    <p className="text-gray-700">
+                        <span className="font-medium">Category:</span> {product.category}
+                    </p>
+                    <p className="text-gray-700">
+                        <span className="font-medium">Price:</span> ${product.price.toFixed(2)}
+                    </p>
+                    <p className="text-gray-700">
+                        <span className="font-medium">Available:</span> {product.available ? 'Yes' : 'No'}
+                    </p>
+                    <p className="text-gray-700">
+                        <span className="font-medium">City:</span> {product.city}
+                    </p>
+                </div>
+
+                {/* Seller Information */}
                 {user && (
-                    <Link href={`/profile/${user.id}`} className="mt-4">
-                        <h3 className="text-lg font-semibold text-gray-800">Seller Information</h3>
-                        <p className="text-gray-700">
-                            <strong>Name:</strong> {user.name}
-                        </p>
-                        <p className="text-gray-700">
-                            <strong>Email:</strong> {user.email}
-                        </p>
-                        <p>
-                            <Image
-                                src={`${user.photoUrl}`}
-                                alt="Profile picture"
-                                width={100}  // Set a width that fits with your design (larger than the actual displayed width)
-                                height={50} // Fixed height
-                                className="w-full h-[100px] object-contain mb-4 rounded-md"
-                            />
-                        </p>
-                    </Link>
+                    <div className="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg">
+                        <Image
+                            src={user.photoUrl}
+                            alt="Seller profile picture"
+                            width={60}
+                            height={60}
+                            className="w-16 h-16 rounded-full object-cover"
+                        />
+                        <div>
+                            <h3 className="text-lg font-semibold text-gray-800">{user.name}</h3>
+                            <p className="text-gray-600 text-sm">{user.email}</p>
+                        </div>
+                    </div>
                 )}
 
                 {/* Buy Button */}
-                <div className="mt-auto">
-                    <button
-                        className="mt-4 w-full text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800">
-                        Buy
-                    </button>
-                </div>
+                <button
+                    className="mt-auto w-full text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2.5 transition duration-300">
+                    Buy Now
+                </button>
             </div>
         </div>
+
     );
 };
 
