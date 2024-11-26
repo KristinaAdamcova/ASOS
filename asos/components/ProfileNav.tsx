@@ -3,17 +3,21 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function ProfileNav() {
+type NavItem = {
+    href: string;
+    label: string;
+}
+
+type Props = {
+    nav: NavItem[];
+}
+
+export default function ProfileNav({ nav }: Props) {
     const pathname = usePathname();
     
     return (
         <nav className="space-y-2">
-            {[
-                { href: '/profile', label: 'Profile Overview' },
-                { href: '/profile/products', label: 'My Products' },
-                { href: '/profile/orders', label: 'My Orders' },
-                { href: '/profile/ratings', label: 'My Ratings' },
-            ].map(({ href, label }) => (
+            {nav.map(({ href, label }) => (
                 <Link
                     key={href}
                     href={href}

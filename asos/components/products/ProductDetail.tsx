@@ -1,6 +1,7 @@
 import prisma from '@/lib/prisma';
 import type { Product } from '@prisma/client';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from "react";
 
 type Props = {
@@ -44,7 +45,7 @@ const Product = async ({ product }: Props) => {
                 </p>
 
                 {user && (
-                    <div className="mt-4">
+                    <Link href={`/profile/${user.id}`} className="mt-4">
                         <h3 className="text-lg font-semibold text-gray-800">Seller Information</h3>
                         <p className="text-gray-700">
                             <strong>Name:</strong> {user.name}
@@ -52,7 +53,7 @@ const Product = async ({ product }: Props) => {
                         <p className="text-gray-700">
                             <strong>Email:</strong> {user.email}
                         </p>
-                    </div>
+                    </Link>
                 )}
 
                 {/* Buy Button */}

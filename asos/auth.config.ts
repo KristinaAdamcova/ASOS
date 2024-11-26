@@ -24,7 +24,7 @@ export const authConfig = {
     },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const protectedPaths = ["/profile", "/profile/*", "/sell"];
+      const protectedPaths = ["/account", "/account/*", "/sell"];
       const isProtected = protectedPaths.some((path) =>
         nextUrl.pathname.startsWith(path)
       );

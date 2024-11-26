@@ -14,6 +14,18 @@ export async function fetchUserByEmail(email: string): Promise<User | null> {
     }
 }
 
+export async function fetchUser(id: string): Promise<User | null> {
+    try {
+        const user = await prisma.user.findUnique({
+            where: { id },
+        });
+        return user;
+    } catch (error) {
+        console.error("Failed to fetch profile:", error);
+        throw new Error("Failed to fetch profile.");
+    }
+}
+
 export async function fetchProduct(id: string): Promise<Product | null> {
     try {
         const product = await prisma.product.findUnique({

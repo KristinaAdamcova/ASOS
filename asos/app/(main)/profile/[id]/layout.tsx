@@ -1,20 +1,20 @@
-import { fetchUserByEmail } from "@/app/lib/data";
-import { auth } from "@/auth";
+import { fetchUser } from "@/app/lib/data";
 import ProfileNav from "@/components/ProfileNav";
-import { redirect } from "next/navigation";
 import Image from 'next/image';
 
 export default async function Layout({
     children,
+    params,
 }: Readonly<{
     children: React.ReactNode;
+    params: { id: string };
 }>) {
-    const session = await auth();
-    const user = session?.user?.email ? await fetchUserByEmail(session.user.email) : null;
+    const user = await fetchUser(params.id);
 
-    if (!session || !user) {
-        redirect("/login");
-    }
+    const nav = [
+        { href: `/profile/${params.id}/`, label: 'Products' },
+        { href: `/profile/${params.id}/ratings`, label: 'Ratings' },
+    ];
 
     return (
         <div className="container mx-auto p-10 gap-5 flex flex-row">
@@ -37,25 +37,17 @@ export default async function Layout({
                                     </svg>
                                 </div>
                             )}
-                            {/*<div className="w-full h-full flex items-center justify-center text-gray-500">*/}
-                            {/*    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">*/}
-                            {/*        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />*/}
-                            {/*    </svg>*/}
-                            {/*</div>*/}
                         </div>
-                        <div className="w-6/8 flex flex-col">
+                        <div className="w-6/8 flex flex-col justify-center">
                             <h3 className="text-lg font-semibold text-gray-800">
                                 {user?.name || 'Guest'}
                             </h3>
-                            <p className="text-sm text-gray-600">
-                                {user?.email || 'No email'}
-                            </p>
                         </div>
                     </div>
 
                     <h2 className="text-xl font-semibold text-gray-800 mb-4">Profile Menu</h2>
-                    
-                    <ProfileNav />
+
+                    <ProfileNav nav={nav} />
                 </div>
             </div>
 
