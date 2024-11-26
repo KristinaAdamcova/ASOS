@@ -17,15 +17,17 @@ export default async function LoginPage() {
                 <Image
                     src="/logo.png" // Dynamically include the product's photo path
                     alt="Description of the image"
-                    width={100}  // Specify width
-                    height={100} // Specify height
+                    width={200}  // Specify width
+                    height={200} // Specify height
                 />
                 <span
-                    className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Neighbourhood portal</span>
+                    className="self-center text-7xl font-semibold whitespace-nowrap dark:text-white" style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}>Neighbourhood Portal</span>
             </Link>
 
-            <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg w-full mt-20">
-                <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Login</h1>
+            <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg w-full mt-10">
+                <h1 className="text-4xl font-semibold text-center text-gray-800 mb-4"
+                    style={{ textShadow: "0.8px 0.8px 1px rgba(0, 0, 0, 0.5)" }}>
+                    Login</h1>
                 <LoginForm />
             </div>
         </div>
