@@ -42,6 +42,17 @@ const ProductBuy = ({ product, user }: Props) => {
                     <p className="text-gray-700">
                         <strong>Email:</strong> {user.email}
                     </p>
+                    <p>
+                        <strong>toto spravit nejako krajsie ze mala fotka v gulicke, meno,
+                            </strong> {user.image}
+                        <Image
+                            src={`${user.image}`}
+                            alt="Profile picture"
+                            width={100}  // Set a width that fits with your design (larger than the actual displayed width)
+                            height={50} // Fixed height
+                            className="w-full h-[100px] object-contain mb-4 rounded-md"
+                        />
+                    </p>
                 </div>
             )}
             <div className="mt-auto">

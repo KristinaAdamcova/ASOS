@@ -53,6 +53,15 @@ const Product = async ({ product }: Props) => {
                         <p className="text-gray-700">
                             <strong>Email:</strong> {user.email}
                         </p>
+                        <p>
+                            <Image
+                                src={`${user.photoUrl}`}
+                                alt="Profile picture"
+                                width={100}  // Set a width that fits with your design (larger than the actual displayed width)
+                                height={50} // Fixed height
+                                className="w-full h-[100px] object-contain mb-4 rounded-md"
+                            />
+                        </p>
                     </Link>
                 )}
 

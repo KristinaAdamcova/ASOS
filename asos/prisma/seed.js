@@ -12,6 +12,7 @@ async function main() {
             email: 'alice@example.com',
             name: 'Alice',
             password: bcrypt.hashSync('123', 10),
+            photoUrl: '/profilovka_alica.jpg'
         },
     });
 
@@ -22,6 +23,7 @@ async function main() {
             email: 'bob@example.com',
             name: 'Bob',
             password: bcrypt.hashSync('123', 10),
+            photoUrl: '/profilovka_bob.jpg'
         },
     });
 

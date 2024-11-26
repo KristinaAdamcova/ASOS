@@ -24,6 +24,7 @@ export const GET = async (req: NextRequest) => {
                 id: user.id,
                 name: user.name,
                 email: user.email,
+                image: user.photoUrl,
             } : null,
         }));
 
