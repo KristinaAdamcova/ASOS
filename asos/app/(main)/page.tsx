@@ -9,7 +9,7 @@ import { ProductWithUser } from '@/app/lib/definitions';
 
 async function fetchProducts(category: string | null = null): Promise<ProductWithUser[]> {
     const query = category ? `?category=${encodeURIComponent(category)}` : '';
-    const res = await fetch(`http://localhost:3000/api/products${query}`, {
+    const res = await fetch(`/api/products${query}`, {
         cache: 'no-store',
     });
 
