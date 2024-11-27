@@ -13,9 +13,9 @@ const Product = async ({ product }: Props) => {
 
     return (
         <div
-            className="flex flex-col lg:flex-row p-6 mb-4 border border-gray-200 rounded-2xl shadow-xl hover:shadow-lg transition-shadow duration-300 bg-white">
+            className="max-w-lg mx-auto p-6 mb-2 border border-gray-200 rounded-2xl shadow-xl hover:shadow-lg transition-shadow duration-300 bg-white">
             {/* Image Section */}
-            <div className="lg:w-1/3 mb-6 lg:mb-0">
+            <div className="mb-6">
                 <Image
                     src={`/${product.photoPath}`}
                     alt="Product image"
@@ -26,7 +26,7 @@ const Product = async ({ product }: Props) => {
             </div>
 
             {/* Text Section */}
-            <div className="lg:w-2/3 lg:pl-6 flex flex-col">
+            <div className="">
                 {/* Product Information */}
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">{product.name}</h2>
                 <p className="text-gray-600 mb-6">{product.description}</p>
@@ -65,7 +65,8 @@ const Product = async ({ product }: Props) => {
 
                 {/* Buy Button */}
                 <Link href={`/checkout?productId=${product.id}`}
-                    className="mt-auto w-full text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2.5 transition duration-300">
+                      className="w-full text-xl py-3 mt-4 bg-green-500 text-white font-semibold rounded-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-lg flex items-center justify-center"
+                      style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}>
                     Buy Now
                 </Link>
             </div>
