@@ -1,5 +1,6 @@
-/** @type {import('next').NextConfig} */
+import withPWA from '@ducanh2912/next-pwa';
 
+/** @type {import('next').NextConfig} */
 const nextConfig = {
     webpack: (config, { dev }) => {
         // Disable caching in development
@@ -10,4 +11,8 @@ const nextConfig = {
     },
 };
 
-export default nextConfig;
+export default withPWA({
+    dest: 'public', // PWA assets location
+    disable: process.env.NODE_ENV === 'development', // Disable PWA in development
+    ...nextConfig, // Include your existing config
+});

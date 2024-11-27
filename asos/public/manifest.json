@@ -1,0 +1,21 @@
+{
+  "name": "Neighbourhood Portal",
+  "short_name": "NPortal",
+  "description": "Neighbourhood Portal",
+  "icons": [
+    {
+      "src": "/icons/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icons/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "display": "standalone"
+}
