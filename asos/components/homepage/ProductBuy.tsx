@@ -11,7 +11,7 @@ type Props = {
 const ProductBuy = ({ product, user }: Props) => {
     return (
         <div
-            className="flex flex-col p-4 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-white">
+            className="flex flex-col p-4 mb-3 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-white">
             {/* Title */}
             <h2 className="text-xl font-bold text-gray-800 mb-4 text-center">{product.name}</h2>
             {/* Product Image */}

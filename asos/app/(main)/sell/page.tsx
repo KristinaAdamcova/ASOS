@@ -11,7 +11,7 @@ export default async function SellPage() {
     }
 
     return (
-        <div>
+        <div className="p-8 bg-white rounded-lg">
             <SellForm user={user} />
         </div>
     );
