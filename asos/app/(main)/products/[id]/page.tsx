@@ -25,9 +25,9 @@ export default async function Page({ params }: Props) {
     ratingsReceived = ratings.ratingsReceived;
 
     return (
-        <main>
+        <main className="p-5 w-auto">
             <ProductDetail product={product}/>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4 mt-10">Seller ratings:</h2>
+            <h2 className="text-2xl font-semibold text-gray-800 mt-6">Seller ratings:</h2>
             {ratingsReceived.length > 0 ? (
                 <ul className="mt-4">
                     {ratingsReceived.map((rating) => (
