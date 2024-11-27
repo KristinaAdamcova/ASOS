@@ -44,13 +44,12 @@ model Product {
 
 model Order {
   id        String   @id @default(cuid())
-  quantity  Int
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-  productId String
-  product   Product  @relation(fields: [productId], references: [id])
+  productId String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
   timestamp DateTime @default(now())
-
+  quantity  Int      @default(1)
   @@map("History")
 }
 

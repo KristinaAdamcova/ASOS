@@ -11,7 +11,7 @@ export default async function Orders() {
     }
 
     const orders = await fetchOrdersByUser(session.user.id)
-    const products = await Promise.all(orders.map(async (order) => await fetchProduct(order.productId)))
+    const products = await Promise.all(orders.map(async (order) => await fetchProduct(order.productId ?? "")))
 
     return (
         <div className="flex justify-center items-center">

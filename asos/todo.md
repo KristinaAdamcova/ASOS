@@ -6,7 +6,7 @@
 - [x] vytvorit stranku cudzieho uzivatela
 - [x] zobrazenie + pridanie ratingu pouzivatela
 - [x] prerobit zobrazenie profilu pri produkte
-- [ ] formular objednavky
+- [x] formular objednavky
 - [ ] uprava produktu
 - [ ] dorobit vzhlad stranky
 - [ ] cascade product delete?

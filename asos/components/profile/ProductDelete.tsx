@@ -4,6 +4,7 @@ import { ProductWithUser, User } from '@/app/lib/definitions';
 import Image from 'next/image';
 import React from "react";
 import {useRouter} from "next/navigation";
+import { revalidatePath } from 'next/cache';
 
 type Props = {
     product: ProductWithUser;
@@ -38,6 +39,7 @@ const ProductDelete = ({ product, user }: Props) => {
             alert('Product deleted successfully.');
 
             router.refresh();
+            revalidatePath(`/account/orders`);
         } catch (error) {
             // Notify the user of an error
             console.error('Error deleting product:', error);
