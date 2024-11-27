@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useRouter} from "next/navigation";
 import {Product} from "@prisma/client";
-import {revalidatePath} from "next/cache";
 
 type Props = {
     product: Product;
@@ -75,7 +74,6 @@ export default function UpdateProductForm({ product }: Props) {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
 
-                    placeholder={product.name}
                     className="w-full mt-2 p-3 border border-yellow-500 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
                     
                 />
@@ -89,7 +87,6 @@ export default function UpdateProductForm({ product }: Props) {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
 
-                    placeholder={product.description}
                     className="w-full mt-2 p-3 border border-yellow-500 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
                     
                 />
@@ -103,7 +100,7 @@ export default function UpdateProductForm({ product }: Props) {
                     value={price}
                     onChange={(e) => setPrice(Number(e.target.value))}
 
-                    placeholder={product.price}
+
                     className="w-full mt-2 p-3 border border-yellow-500 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
                     
                 />
@@ -117,7 +114,6 @@ export default function UpdateProductForm({ product }: Props) {
                     value={available}
                     onChange={(e) => setAvailable(Number(e.target.value))}
 
-                    placeholder={product.available}
                     className="w-full mt-2 p-3 border border-yellow-500 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
                     
                 />
@@ -131,7 +127,6 @@ export default function UpdateProductForm({ product }: Props) {
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
 
-                    placeholder={product.city}
                     className="w-full mt-2 p-3 border border-yellow-500 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
                     
                 />

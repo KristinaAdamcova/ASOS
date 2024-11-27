@@ -47,7 +47,7 @@ const ProductBuy = ({ product, user }: Props) => {
 
                 <div className="flex items-center space-x-3 mb-4">
                     <Image
-                        src={user.image || '/default.png'}
+                        src={user.photoUrl || '/default.png'}
                         alt="Seller profile picture"
                         width={50}
                         height={50}
