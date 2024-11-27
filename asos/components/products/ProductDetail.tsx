@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma';
+import { fetchUser } from '@/app/lib/data';
 import type { Product } from '@prisma/client';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,9 +9,7 @@ type Props = {
 }
 
 const Product = async ({ product }: Props) => {
-    const user = await prisma.user.findUnique({
-        where: { id: product.userId },
-    });
+    const user = await fetchUser(product.userId);
 
     return (
         <div
@@ -50,9 +48,9 @@ const Product = async ({ product }: Props) => {
 
                 {/* Seller Information */}
                 {user && (
-                    <div className="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg">
+                    <Link href={`/profile/${user.id}`} className="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg">
                         <Image
-                            src={user.photoUrl}
+                            src={user.photoUrl || 'default.png'}
                             alt="Seller profile picture"
                             width={60}
                             height={60}
@@ -62,7 +60,7 @@ const Product = async ({ product }: Props) => {
                             <h3 className="text-lg font-semibold text-gray-800">{user.name}</h3>
                             <p className="text-gray-600 text-sm">{user.email}</p>
                         </div>
-                    </div>
+                    </Link>
                 )}
 
                 {/* Buy Button */}
