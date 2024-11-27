@@ -47,7 +47,7 @@ export default function UpdateProductForm({ product }: Props) {
             }
 
             alert("Product successfully updated!");
-            router.push("/account/products");
+            router.push("/account");
         } catch (error) {
             console.error("Error:", error);
             setErrorMessage("An error occurred while uploading");

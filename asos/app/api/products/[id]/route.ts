@@ -75,6 +75,8 @@ export const PUT = async (req: NextRequest, { params }: { params: { id: string }
             where: { id: id },
             data: body, // Ensure the structure of `body` matches your `product` schema in Prisma
         });
+        revalidatePath(`/`);
+        revalidatePath(`/account`);
         revalidatePath(`/account/products`);
 
         return NextResponse.json(updatedProduct);
