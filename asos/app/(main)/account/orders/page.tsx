@@ -43,6 +43,9 @@ export default async function Orders() {
                                     <p className="text-lg text-gray-700">
                                         <strong>Price:</strong> {product?.price}
                                     </p>
+                                    <p className="text-lg text-gray-700">
+                                        <strong>Quantity:</strong> {orders.find((order) => order.productId === product?.id)?.quantity}
+                                    </p>
                                 </div>
                             </li>
                         ))}

@@ -14,13 +14,13 @@ datasource db {
 }
 
 model User {
-  id              String       @id @default(cuid())
+  id              String    @id @default(cuid())
   email           String    @unique
   name            String?
   password        String
   photoUrl        String?
-  products        Product[] // Relation field
-  histories       History[]
+  products        Product[]
+  orders          Order[]
   ratingsGiven    Rating[]  @relation("RatingsGiven")
   ratingsReceived Rating[]  @relation("RatingsReceived")
 
@@ -28,7 +28,7 @@ model User {
 }
 
 model Product {
-  id          String    @id @default(cuid())
+  id          String   @id @default(cuid())
   photoPath   String
   name        String
   description String
@@ -37,18 +37,21 @@ model Product {
   price       Float
   city        String
   userId      String
-  user        User      @relation(fields: [userId], references: [id])
-  histories   History[]
-  createdAt   DateTime  @default(now())
+  user        User     @relation(fields: [userId], references: [id])
+  orders      Order[]
+  createdAt   DateTime @default(now())
 }
 
-model History {
+model Order {
   id        String   @id @default(cuid())
+  quantity  Int
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   productId String
   product   Product  @relation(fields: [productId], references: [id])
   timestamp DateTime @default(now())
+
+  @@map("History")
 }
 
 model Rating {

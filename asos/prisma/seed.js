@@ -74,16 +74,18 @@ async function main() {
     });
 
     // Create Histories
-    await prisma.history.create({
+    await prisma.order.create({
         data: {
+            quantity: 1,
             user: { connect: { id: user1.id } },
             product: { connect: { id: product1.id } },
             timestamp: new Date(),
         },
     });
 
-    await prisma.history.create({
+    await prisma.order.create({
         data: {
+            quantity: 2,
             user: { connect: { id: user2.id } },
             product: { connect: { id: product2.id } },
             timestamp: new Date(),
@@ -106,7 +108,7 @@ async function main() {
             ratedTo: { connect: { id: user1.id } },
             description: 'Smooth transaction!',
             rating: 4,
-        },
+        }
     });
 }
 

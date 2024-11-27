@@ -81,7 +81,7 @@ export async function fetchRatingsByUser(userId: string) {
 
 export async function fetchOrdersByUser(userId: string) {
     try {
-        const orders = await prisma.history.findMany({
+        const orders = await prisma.order.findMany({
             where: { userId: userId }
         });
 
