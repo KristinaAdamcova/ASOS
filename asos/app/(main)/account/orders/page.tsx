@@ -28,9 +28,9 @@ export default async function Orders() {
                                     <Image
                                         src={`/${product?.photoPath}`}
                                         alt="Product image"
-                                        width={50} // Adjust size as needed
-                                        height={50} // Adjust size as needed
-                                        className="w-full h-auto object-cover rounded-md"
+                                        width={400} // Adjust size as needed
+                                        height={200} // Adjust size as needed
+                                        className="w-full h-[200px] object-contain mb-4 rounded-md"
                                     />
                                 </div>
                                 <div className="w-3/4 pl-4 flex flex-col">
