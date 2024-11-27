@@ -13,7 +13,7 @@ const Product = async ({ product }: Props) => {
 
     return (
         <div
-            className="flex flex-col lg:flex-row p-6 border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 bg-white">
+            className="flex flex-col lg:flex-row p-6 mb-4 border border-gray-200 rounded-2xl shadow-xl hover:shadow-lg transition-shadow duration-300 bg-white">
             {/* Image Section */}
             <div className="lg:w-1/3 mb-6 lg:mb-0">
                 <Image

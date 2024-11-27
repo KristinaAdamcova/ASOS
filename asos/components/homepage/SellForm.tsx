@@ -81,7 +81,7 @@ export default function SellForm({ user }: Props) {
     return (
         <form
             onSubmit={handleSubmit}
-            className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg"
+            className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.25)]"
         >
             {errorMessage && (
                 <div className="mb-4 text-red-500 text-sm">{errorMessage}</div>
@@ -97,7 +97,7 @@ export default function SellForm({ user }: Props) {
                     onChange={(e) => setName(e.target.value)}
 
                     placeholder="Enter product name"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-700"
                     required
                 />
             </div>
@@ -111,7 +111,7 @@ export default function SellForm({ user }: Props) {
                     onChange={(e) => setDescription(e.target.value)}
 
                     placeholder="Enter your description"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-700"
                     required
                 />
             </div>
@@ -120,7 +120,7 @@ export default function SellForm({ user }: Props) {
                 <select
                     name="category"
                     id="category"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-400"
                     required
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
@@ -141,7 +141,7 @@ export default function SellForm({ user }: Props) {
                     onChange={(e) => setPrice(Number(e.target.value))}
 
                     placeholder="Enter your price"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-500"
                     required
                 />
             </div>
@@ -155,7 +155,7 @@ export default function SellForm({ user }: Props) {
                     onChange={(e) => setAvailable(Number(e.target.value))}
 
                     placeholder="Enter count"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-700"
                     required
                 />
             </div>
@@ -169,7 +169,7 @@ export default function SellForm({ user }: Props) {
                     onChange={(e) => setCity(e.target.value)}
 
                     placeholder="Enter your city"
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-700"
                     required
                 />
             </div>
@@ -177,13 +177,14 @@ export default function SellForm({ user }: Props) {
                 <label className="block text-sm font-medium text-gray-700" htmlFor="user_avatar">Picture of your
                     product</label>
                 <input
-                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
+                    className="w-full mt-2 p-3 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-400"
                     id="user_avatar" name="user_avatar" type="file"
                 />
             </div>
             <button
                 type="submit"
-                className="w-full py-3 mt-4 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                className="w-full py-3 mt-4 bg-green-500 text-white font-semibold rounded-md hover:bg-green-400 focus:outline-none focus:ring-2 focus:ring-green-500 shadow-lg"
+                style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
             >
                 Publish
             </button>

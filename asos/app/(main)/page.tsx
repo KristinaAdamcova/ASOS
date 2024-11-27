@@ -68,11 +68,11 @@ function HomeContent() {
     }, [searchQuery, products]);
 
     return (
-        <div>
+        <div className="p-4">
             <SearchBar onSearch={setSearchQuery} />
 
             {/* Filter Buttons */}
-            <div className="flex justify-center items-center min-h-7 mt-3 mb-3">
+            <div className="flex justify-center items-center min-h-7 mt-5 mb-5">
                 <div className="space-x-4">
                     <button className="text-white bg-green-500 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800 shadow-lg">
                         <Link href="/">All</Link>
