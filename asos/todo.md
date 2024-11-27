@@ -9,3 +9,4 @@
 - [ ] formular objednavky
 - [ ] uprava produktu
 - [ ] dorobit vzhlad stranky
+- [ ] cascade product delete?
