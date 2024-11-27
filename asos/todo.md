@@ -10,3 +10,5 @@
 - [ ] uprava produktu
 - [ ] dorobit vzhlad stranky
 - [ ] cascade product delete?
+- [ ] aby editovat vedel len vlastnik produktu, nie ze ziskas id a das /edit
+- [ ] dokumentaciu//readme upravit, aj to sa hodnoti

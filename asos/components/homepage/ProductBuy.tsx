@@ -44,9 +44,10 @@ const ProductBuy = ({ product, user }: Props) => {
             <hr className="my-4 border-gray-300"/>
             {/* Seller Information */}
             {user && (
+
                 <div className="flex items-center space-x-3 mb-4">
                     <Image
-                        src={user.photoUrl || '/default.png'}
+                        src={user.image || '/default.png'}
                         alt="Seller profile picture"
                         width={50}
                         height={50}
