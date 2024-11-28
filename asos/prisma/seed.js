@@ -33,7 +33,7 @@ async function main() {
         create: {
             email: 'carol@example.com',
             name: 'Carol',
-            password: bcrypt.hashSync('456', 10),
+            password: bcrypt.hashSync('123', 10),
             photoUrl: ''
         },
     });
@@ -44,7 +44,7 @@ async function main() {
         create: {
             email: 'dave@example.com',
             name: 'Dave',
-            password: bcrypt.hashSync('789', 10),
+            password: bcrypt.hashSync('123', 10),
             photoUrl: ''
         },
     });
@@ -70,7 +70,7 @@ async function main() {
             name: 'Smartphone',
             photoPath: 'smartphone.png',
             description: 'Latest model smartphone',
-            category: 'service',
+            category: 'sale',
             available: 20,
             price: 800.00,
             city: 'San Francisco',
@@ -118,6 +118,21 @@ async function main() {
             category: 'sale',
             available: 5,
             price: 250.00,
+            city: 'Chicago',
+            user: {
+                connect: { id: user4.id },
+            },
+        },
+    });
+
+    const product6 = await prisma.product.create({
+        data: {
+            name: 'Cutting grass',
+            photoPath: 'cutting.png',
+            description: 'I will cut your grass for you!',
+            category: 'service',
+            available: 5,
+            price: 20.00,
             city: 'Chicago',
             user: {
                 connect: { id: user4.id },
