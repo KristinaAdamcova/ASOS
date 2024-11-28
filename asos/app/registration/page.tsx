@@ -21,7 +21,12 @@ export default async function RegistrationPage() {
                     height={200} // Specify height
                 />
                 <span
-                    className="self-center text-7xl font-semibold whitespace-nowrap dark:text-white" style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}>Neighbourhood portal</span>
+                    className="text-xl md:text-2xl lg:text-5xl font-semibold whitespace-nowrap text-white"
+                    style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", textAlign: "center" }}
+                >
+                        <span style={{ display: "block" }}>Neighbourhood</span>
+                        <span style={{ display: "block" }}>Portal</span>
+                    </span>
             </Link>
 
 

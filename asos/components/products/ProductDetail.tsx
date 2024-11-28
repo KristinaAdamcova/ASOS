@@ -26,7 +26,7 @@ const Product = async ({ product }: Props) => {
             </div>
 
             {/* Text Section */}
-            <div className="">
+            <div>
                 {/* Product Information */}
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">{product.name}</h2>
                 <p className="text-gray-600 mb-6">{product.description}</p>
