@@ -50,7 +50,7 @@ export default function SearchBar({ onSearch }: { onSearch: (query: string) => v
                 />
                 <button
                     type="submit"
-                    className="text-white absolute end-2.5 bottom-2.5 bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800 shadow-lg"
+                    className="text-white absolute end-2.5 bottom-2.5 bg-green-500 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800 shadow-lg"
                 >
                     Search
                 </button>

@@ -12,20 +12,21 @@ export default function NavBarClient({
     user: { name?: string; email?: string } | null;
 }) {
     return (
-        <nav className="bg-gray-900 shadow-lg">
+        <nav className="bg-gray-900 shadow-lg p-4">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
                 <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
                     <Image
                         src="/logo.png" // Dynamically include the product's photo path
                         alt="Description of the image"
-                        width={110}  // Specify width
-                        height={110} // Specify height
+                        width={130}  // Specify width
+                        height={130} // Specify height
                     />
                     <span
-                        className="self-center text-3xl font-semibold whitespace-nowrap text-white"
-                        style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)" }}
+                        className="text-xl md:text-2xl lg:text-5xl font-semibold whitespace-nowrap text-white"
+                        style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", textAlign: "center" }}
                     >
-                        Neighbourhood Portal
+                        <span style={{ display: "block" }}>Neighbourhood</span>
+                        <span style={{ display: "block" }}>Portal</span>
                     </span>
                 </Link>
                 <button data-collapse-toggle="navbar-default" type="button"
