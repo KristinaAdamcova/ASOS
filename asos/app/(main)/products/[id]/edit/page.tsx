@@ -30,8 +30,8 @@ export default async function Page({ params }: Props) {
     }
 
     return (
-        <main>
+        <div className="p-8 bg-white rounded-lg">
             <UpdateProductForm product={product}/>
-        </main>
+        </div>
     );
 }

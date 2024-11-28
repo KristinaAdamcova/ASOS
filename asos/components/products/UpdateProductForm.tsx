@@ -59,7 +59,7 @@ export default function UpdateProductForm({ product }: Props) {
     return (
         <form
             onSubmit={handleSubmit}
-            className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg"
+            className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-[0px_4px_20px_rgba(0,0,0,0.25)]"
         >
             {errorMessage && (
                 <div className="mb-4 text-red-500 text-sm">{errorMessage}</div>
