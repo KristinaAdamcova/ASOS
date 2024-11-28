@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Product } from "@prisma/client";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 type Props = {
     product: Product;
@@ -11,6 +12,7 @@ type Props = {
 
 export default function CheckoutForm({ product }: Props) {
     const router = useRouter();
+    const session = useSession();
     const [quantity, setQuantity] = useState(1);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,6 +23,22 @@ export default function CheckoutForm({ product }: Props) {
         setIsSubmitting(true);
 
         try {
+            if (quantity > product.available) {
+                throw new Error("Not enough stock");
+            }
+
+            if (quantity <= 0) {
+                throw new Error("Quantity must be greater than 0");
+            }
+
+            if (product.available === 0) {
+                throw new Error("Product is out of stock");
+            }
+
+            if (product.userId === session.data?.user?.id) {
+                throw new Error("You cannot order your own product");
+            }
+
             const response = await fetch('/api/orders', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

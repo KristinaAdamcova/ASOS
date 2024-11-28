@@ -14,7 +14,7 @@ export default function NavBarClient({
     return (
         <nav className="bg-gray-900 shadow-lg p-4">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
-                <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+                <Link href="/" className="flex items-center justify-start space-x-3 rtl:space-x-reverse">
                     <Image
                         src="/logo.png" // Dynamically include the product's photo path
                         alt="Description of the image"
@@ -22,11 +22,10 @@ export default function NavBarClient({
                         height={130} // Specify height
                     />
                     <span
-                        className="text-xl md:text-2xl lg:text-5xl font-semibold whitespace-nowrap text-white"
-                        style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)", textAlign: "center" }}
+                        className="text-lg text-left md:text-xl lg:text-3xl font-semibold whitespace-nowrap text-white"
+                        style={{ textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)"}}
                     >
-                        <span style={{ display: "block" }}>Neighbourhood</span>
-                        <span style={{ display: "block" }}>Portal</span>
+                        Neighbourhood<br/>portal
                     </span>
                 </Link>
                 <button data-collapse-toggle="navbar-default" type="button"
