@@ -4,7 +4,7 @@ import bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 async function main() {
-    // Create Users with unique email checks
+    // Create Users
     const user1 = await prisma.user.upsert({
         where: { email: 'alice@example.com' },
         update: {},
@@ -24,6 +24,28 @@ async function main() {
             name: 'Bob',
             password: bcrypt.hashSync('123', 10),
             photoUrl: '/profilovka_bob.jpg'
+        },
+    });
+
+    const user3 = await prisma.user.upsert({
+        where: { email: 'carol@example.com' },
+        update: {},
+        create: {
+            email: 'carol@example.com',
+            name: 'Carol',
+            password: bcrypt.hashSync('456', 10),
+            photoUrl: ''
+        },
+    });
+
+    const user4 = await prisma.user.upsert({
+        where: { email: 'dave@example.com' },
+        update: {},
+        create: {
+            email: 'dave@example.com',
+            name: 'Dave',
+            password: bcrypt.hashSync('789', 10),
+            photoUrl: ''
         },
     });
 
@@ -73,7 +95,37 @@ async function main() {
         },
     });
 
-    // Create Histories
+    const product4 = await prisma.product.create({
+        data: {
+            name: 'Headphones',
+            photoPath: 'headphones.png',
+            description: 'Noise-canceling headphones',
+            category: 'sale',
+            available: 15,
+            price: 300.00,
+            city: 'Los Angeles',
+            user: {
+                connect: { id: user3.id },
+            },
+        },
+    });
+
+    const product5 = await prisma.product.create({
+        data: {
+            name: 'Gaming Chair',
+            photoPath: 'chair.png',
+            description: 'Ergonomic gaming chair',
+            category: 'sale',
+            available: 5,
+            price: 250.00,
+            city: 'Chicago',
+            user: {
+                connect: { id: user4.id },
+            },
+        },
+    });
+
+    // Create Orders
     await prisma.order.create({
         data: {
             quantity: 1,
@@ -92,14 +144,41 @@ async function main() {
         },
     });
 
+    await prisma.order.create({
+        data: {
+            quantity: 3,
+            user: { connect: { id: user3.id } },
+            product: { connect: { id: product3.id } },
+            timestamp: new Date(),
+        },
+    });
+
+    await prisma.order.create({
+        data: {
+            quantity: 1,
+            user: { connect: { id: user4.id } },
+            product: { connect: { id: product4.id } },
+            timestamp: new Date(),
+        },
+    });
+
     // Create Ratings
     await prisma.rating.create({
         data: {
             ratedBy: { connect: { id: user1.id } },
             ratedTo: { connect: { id: user2.id } },
-            description: 'Great buyer!',
+            description: 'Excellent product and fast shipping!',
             rating: 5,
         },
+    });
+
+    await prisma.rating.create({
+        data: {
+            ratedBy: { connect: { id: user3.id } },
+            ratedTo: { connect: { id: user4.id } },
+            description: 'Great seller, highly recommended!',
+            rating: 4,
+        }
     });
 
     await prisma.rating.create({
@@ -107,8 +186,17 @@ async function main() {
             ratedBy: { connect: { id: user2.id } },
             ratedTo: { connect: { id: user1.id } },
             description: 'Smooth transaction!',
-            rating: 4,
-        }
+            rating: 5,
+        },
+    });
+
+    await prisma.rating.create({
+        data: {
+            ratedBy: { connect: { id: user4.id } },
+            ratedTo: { connect: { id: user3.id } },
+            description: 'Awesome experience, thank you!',
+            rating: 5,
+        },
     });
 }
 

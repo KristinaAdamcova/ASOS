@@ -50,7 +50,7 @@ const Product = async ({ product }: Props) => {
                 {user && (
                     <Link href={`/profile/${user.id}`} className="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg">
                         <Image
-                            src={user.photoUrl || 'default.png'}
+                            src={user.photoUrl || '/default.png'}
                             alt="Seller profile picture"
                             width={60}
                             height={60}

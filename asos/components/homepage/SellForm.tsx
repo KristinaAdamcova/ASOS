@@ -126,7 +126,7 @@ export default function SellForm({ user }: Props) {
                     onChange={(e) => setCategory(e.target.value)}
 
                 >
-                    <option value="product" selected>Product</option>
+                    <option value="sale" selected>Product</option>
                     <option value="service">Service</option>
                     <option value="event">Event</option>
                 </select>
